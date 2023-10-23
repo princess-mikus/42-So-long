@@ -1,0 +1,3 @@
+/Users/fcasaubo/CLionProjects/So_Long/cmake-build-debug/CMakeFiles/So_Long.dir
+/Users/fcasaubo/CLionProjects/So_Long/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/fcasaubo/CLionProjects/So_Long/cmake-build-debug/CMakeFiles/rebuild_cache.dir
