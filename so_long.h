@@ -6,7 +6,7 @@
 /*   By: fcasaubo <fcasaubo@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 11:03:16 by fcasaubo          #+#    #+#             */
-/*   Updated: 2023/10/23 16:30:39 by fcasaubo         ###   ########.fr       */
+/*   Updated: 2023/10/25 16:17:51 by fcasaubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,13 @@ typedef struct s_list
 
 // MLX data structure (Sprite images)
 
-typedef struct s_mlx
+typedef struct s_images
 {
-
-}		t_mlx;
+	void	**walls;
+	void	*player;
+	void	*door;
+	void	**coins;
+}		t_images;
 
 // Mlx Window structure
 
