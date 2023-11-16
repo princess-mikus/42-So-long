@@ -6,11 +6,9 @@
 /*   By: fcasaubo <fcasaubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 10:52:11 by fcasaubo          #+#    #+#             */
-/*   Updated: 2023/10/19 15:17:44 by fcasaubo         ###   ########.fr       */
+/*   Updated: 2023/11/07 10:32:52 by fcasaubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "so_long.h"
 
 #include "so_long.h"
 

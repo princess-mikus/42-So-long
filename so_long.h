@@ -6,7 +6,7 @@
 /*   By: fcasaubo <fcasaubo@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 11:03:16 by fcasaubo          #+#    #+#             */
-/*   Updated: 2023/10/25 16:17:51 by fcasaubo         ###   ########.fr       */
+/*   Updated: 2023/11/10 12:11:50 by fcasaubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_list
 
 typedef struct s_images
 {
+
 	void	**walls;
 	void	*player;
 	void	*door;

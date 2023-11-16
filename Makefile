@@ -23,7 +23,7 @@ $(OBJ_DIR)/%.o: %.c $(OBJ_DIR)
 
 $(NAME): $(OBJ)
 	@make -C ./mlx/ && mv ./mlx/libmlx.a . 2>/dev/null
-	@$(CC) $(OBJ) -Lmlx -framework OpenGL -framework AppKit libmlx.a -o $(NAME) 2>/dev/null
+	@$(CC) $(OBJ) -Lmlx -framework OpenGL -framework AppKit libmlx.a -o $(NAME) -g -fsanitize=address 2>/dev/null
 
 clean:
 	@rm -rf obj 2>/dev/null
