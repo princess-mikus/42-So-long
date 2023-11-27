@@ -6,7 +6,7 @@
 /*   By: fcasaubo <fcasaubo@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 10:48:07 by fcasaubo          #+#    #+#             */
-/*   Updated: 2023/10/20 15:22:11 by fcasaubo         ###   ########.fr       */
+/*   Updated: 2023/11/20 09:36:11 by fcasaubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,23 +46,25 @@ int	path_validator(t_data *data)
 	t_list	**positions;
 	char	**map;
 	int 	i;
+	t_data	data_copy;
 
+	data_copy = *data;
 	positions = malloc(sizeof(t_list *));
 	*positions = sl_lstnew(data->player_y, data->player_x);
 	map = malloc(data->map_y * sizeof(char *));
 	i = -1;
-	while (data->map[++i] != NULL)
+	while (data_copy.map[++i] != NULL)
 		map[i] = ft_strdup(data->map[i]);
 	map[i] = NULL;
-	search_exit(data, map, positions);
-	while ((data->exit > 0 || data->coins >= 0) && *positions != NULL)
-		search_exit(data, map, positions);
+	search_exit(&data_copy, map, positions);
+	while ((data_copy.exit > 0 || data_copy.coins >= 0) && *positions != NULL)
+		search_exit(&data_copy, map, positions);
 	i = 0;
 	while (map[i] != NULL)
 		free(map[i++]);
 	free(map);
 	free(positions);
-	if (data->exit == 1 || data->coins > 0)
+	if (data_copy.exit == 1 || data_copy.coins > 0)
 		return (0);
 	return (1);
 }

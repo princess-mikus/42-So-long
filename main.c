@@ -6,7 +6,7 @@
 /*   By: fcasaubo <fcasaubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 10:06:57 by fcasaubo          #+#    #+#             */
-/*   Updated: 2023/11/16 15:52:12 by fcasaubo         ###   ########.fr       */
+/*   Updated: 2023/11/23 15:39:14 by fcasaubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int wall_validator(char **map)
 	y = 0;
 	while (map[y][x] == '1')
 		x++;
-	if (map[y][x] != '\n')
+	if (map[y][x])
 		return (0);
 	x--;
 	while (map[y + 1] != NULL)
@@ -80,49 +80,83 @@ int map_validator(t_data *data)
 	return (1);
 }
 
-int	update_map(void **temp)
+void	update_map(t_window *win, t_data *data, t_images *images)
 {
-	int 	y;
-	int 	x;
-	int 	i = 0;
-	t_window	*win 	= temp[0];
-	t_data		*data 	= temp[1];
-	t_images	*images	= temp[2];
+	int	y;
+	int	x;
 
-	y = 0;
-	x = 0;
-//	int j = 0;
-	int a;
-	int b;
-	// Freeing things
-//	while (i < data->coins)
-//		mlx_destroy_image(win->mlx, images->coins[i++]);
-	//if (images->player)
-	//	mlx_destroy_image(win->mlx, images->player);
-//	if (images->door)
-//		mlx_destroy_image(win->mlx, images->door);
-	i = 0;
-//	while (images->walls[i])
-//		mlx_destroy_image(win->mlx, images->walls[i++]);
 	y = 0;
 	x = 0;
 	while (data->map[y])
 	{
-		printf("%p, %p, %p, %p\n", images->coins, images->player, images->door, images->walls);
 		while (data->map[y][x])
 		{
-			if (data->map[y][x] == 'P')
+			if (data->map[y][x] == 'D' && data->coins < 1)
+				exit (0);
+			else if (data->map[y][x] != '1' && data->map[y][x] != '\n')
+				mlx_put_image_to_window(win->mlx, win->pointer, images->floor, (x * 64) + 64, (y * 64) + 64);
+			if (data->map[y][x] == 'E' || data->map[y][x] == 'D')
 			{
-				images->player = mlx_xpm_file_to_image(win->mlx, "sprites/TEMMIE.xpm", &a, &b);
-				mlx_put_image_to_window(win->mlx, win->pointer, images->player, x * 64, y * 64);
+				if (data->coins == 0)
+					mlx_put_image_to_window(win->mlx, win->pointer, images->door_open, (x * 64) + 64, (y * 64) + 64 - 20);
+				else
+					mlx_put_image_to_window(win->mlx, win->pointer, images->door_closed, (x * 64) + 64, (y * 64) + 64 - 20);
 			}
+			if (data->map[y][x] == 'P' || data->map[y][x] == 'D')
+				mlx_put_image_to_window(win->mlx, win->pointer, images->player, (x * 64) + 64, (y * 64) + 64);
+			if (data->map[y][x] == 'C')
+				mlx_put_image_to_window(win->mlx, win->pointer, images->coins, (x * 64) + 64, (y * 64) + 64);
 			x++;
 		}
 		x = 0;
 		y++;
 	}
-	images->walls[i] = NULL;
-	return (0);
+}
+
+void	draw_walls(t_window *win, t_data *data, t_images *images)
+{
+	int y;
+	int	x;
+
+	y = 0;
+	while (data->map[y])
+	{
+		x = 0;
+		while (data->map[y][x])
+		{
+			if (data->map[y][x] == '1')
+			{
+				if (x == 0 && y == data->map_y - 3)
+					mlx_put_image_to_window(win->mlx, win->pointer, images->left_corner, (x * 64) + 64, (y * 64) + 64);
+				else if (x == (int) ft_strlen(data->map[y]) - 1 && y == data->map_y - 3)
+					mlx_put_image_to_window(win->mlx, win->pointer, images->right_corner, (x * 64) + 64, (y * 64) + 64);
+				else
+					mlx_put_image_to_window(win->mlx, win->pointer, images->wall, (x * 64) + 64, (y * 64) + 64);
+			}
+			x++;
+		}
+		y++;
+	}
+}
+
+void	create_map(void **temp)
+{
+	t_window	*win 	= temp[0];
+	t_images	*images	= temp[2];
+
+	int a;
+	int b;
+	images->right_corner = mlx_xpm_file_to_image(win->mlx, "sprites/Right_corner.xpm", &a, &b);
+	images->left_corner = mlx_xpm_file_to_image(win->mlx, "sprites/Left_corner.xpm", &a, &b);
+	images->door_open = mlx_xpm_file_to_image(win->mlx, "sprites/Door_Open.xpm", &a, &b);
+	images->door_closed = mlx_xpm_file_to_image(win->mlx, "sprites/Door_Closed.xpm", &a, &b);
+	images->coins = mlx_xpm_file_to_image(win->mlx, "sprites/Coin.xpm", &a, &b);
+	images->player = mlx_xpm_file_to_image(win->mlx, "sprites/TEMMIE.xpm", &a, &b);
+	images->floor = mlx_xpm_file_to_image(win->mlx, "sprites/Floor_placeholder.xpm", &a, &b);
+	images->wall = mlx_xpm_file_to_image(win->mlx, "sprites/Wall_temp.xpm", &a, &b);
+	// Remember to do a function that draw walls, as they don't change really
+	draw_walls(temp[0], temp[1], temp[2]);
+	update_map(temp[0], temp[1], temp[2]);
 }
 
 int	key_hook(int keycode, void **temp)
@@ -136,31 +170,79 @@ int	key_hook(int keycode, void **temp)
 	y = data->player_y;
 	if (keycode == 53)
 	{
-		printf("bYE!!!\n");
+		printf("bYE!!!\n"); // REEMPLAZAR POR FT_PRINTF
 		exit (0);
 	}
-	if (keycode == 126 && y - 1 > 0 && data->map[y - 1][x] != '1')
+	if (keycode == 126 && data->map[y - 1][x] != '1')
 	{
-		printf("ARRIBA\n");
 		if (data->map[y - 1][x] == 'E')
 			data->map[y - 1][x] = 'D';
-		else if (data->map[y - 1][x] == 'C')
-			data->coins--;
-		data->map[y - 1][x]= 'P';
-		data->map[y][x] = '0';
+		else
+		{
+			if (data->map[y - 1][x] == 'C')
+				data->coins--;
+			data->map[y - 1][x] = 'P';
+		}
 		data->player_y--;
+		if (data->map[y][x] != 'D')
+			data->map[y][x] = '0';
+		else
+			data->map[y][x] = 'E';
+		update_map(temp[0], temp[1], temp[2]);
 	}
 	if (keycode == 125 && data->map[y + 1][x] != '1')
 	{
-		printf("ABAJO\n");
 		if (data->map[y + 1][x] == 'E')
 			data->map[y + 1][x] = 'D';
-		else if (data->map[y + 1][x] == 'C')
-			data->coins--;
-		data->map[y + 1][x]= 'P';
-		data->map[y][x] = '0';
+		else
+		{
+			if (data->map[y + 1][x] == 'C')
+				data->coins--;
+			data->map[y + 1][x]= 'P';
+		}
 		data->player_y++;
+		if (data->map[y][x] != 'D')
+			data->map[y][x] = '0';
+		else
+			data->map[y][x] = 'E';
+		update_map(temp[0], temp[1], temp[2]);
 	}
+	if (keycode == 123 && data->map[y][x - 1] != '1')
+	{
+		if (data->map[y][x - 1] == 'E')
+			data->map[y][x - 1] = 'D';
+		else
+		{
+			if (data->map[y][x - 1] == 'C')
+				data->coins--;
+			data->map[y][x - 1] = 'P';
+		}
+		data->player_x--;
+		if (data->map[y][x] != 'D')
+			data->map[y][x] = '0';
+		else
+			data->map[y][x] = 'E';
+		update_map(temp[0], temp[1], temp[2]);
+	}
+	if (keycode == 124 && data->map[y][x + 1] != '1')
+	{
+		if (data->map[y][x + 1] == 'E')
+			data->map[y][x + 1] = 'D';
+		else
+		{
+			if (data->map[y][x + 1] == 'C')
+				data->coins--;
+			data->map[y][x + 1] = 'P';
+		}
+		data->player_x++;
+		if (data->map[y][x] != 'D')
+			data->map[y][x] = '0';
+		else
+			data->map[y][x] = 'E';
+		update_map(temp[0], temp[1], temp[2]);
+	}
+	if (x != data->player_x || y != data->player_y)
+		printf("%d\n", data->movements++); // REEMPLAZAR POR FT_PRINTF
 	return (keycode);
 }
 
@@ -177,15 +259,19 @@ void	create_window(void **temp)
 	win->pointer = mlx_new_window(win->mlx, win->size_x, win->size_y, "hOI!!! i'm TEMMIE!!");
 	win->background = mlx_xpm_file_to_image(win->mlx, "sprites/Background.xpm", &win->background_x, &win->background_y);
 	mlx_put_image_to_window(win->mlx, win->pointer, win->background, 0, 0);
-	printf("%p\n", data);
 	images->coins = malloc((data->coins) * sizeof(void *));
-	images->walls = malloc((data->map_y * data->map_x) + 1 * sizeof(void *));
-	images->walls[0] = NULL;
-	//update_map(temp);
-	mlx_loop_hook(win->mlx, update_map, temp);
-	mlx_key_hook(win->pointer, key_hook, temp[1]);
+	images->floor = malloc(4096 * sizeof(void *));
+	create_map(temp);
+	//mlx_loop_hook(win->mlx, update_map, temp);
+	mlx_key_hook(win->pointer, key_hook, temp);
 	mlx_loop(win->mlx);
 }
+
+/*
+
+
+
+*/
 
 int main(int argc, char **argv)
 {
@@ -193,9 +279,11 @@ int main(int argc, char **argv)
 	int 		i;
 	t_data		data;
 	t_window	win;
-	t_images	images = {NULL, NULL, NULL, NULL};
+	t_images	images;
 	void	**temp = malloc(3 * sizeof(void *));
+	char	*temp2;
 
+	data.movements = 1;
 	temp[0] = &win;
 	temp[1] = &data;
 	temp[2] = &images;
@@ -208,20 +296,20 @@ int main(int argc, char **argv)
 	if (fd < 0)
 		return (perror(strerror(ENOENT)), 1);
 	data.map = malloc(4096 * sizeof(char **)); // Temporal, reemplazar por listas
-	data.map[i] = get_next_line(fd);
-	data.map_y = 1;
+	temp2 = get_next_line(fd);
+	data.map[i] = ft_strtrim(temp2, "\n");
+	free(temp2);
+	data.map_y = 2;
 	while(data.map[i] != NULL)
 	{
-		//printf("%s", data.map[i]);
-		data.map[++i] = get_next_line(fd);
+		temp2 = get_next_line(fd);
+		data.map[++i] = ft_strtrim(temp2, "\n");
+		free(temp2);
 		data.map_y++;
 	}
-	data.map_x = (int)ft_strlen(data.map[0]);
-	printf("\n\n");
+	data.map_x = (int)ft_strlen(data.map[0]) + 2;
 	if (!map_validator(&data))
 		return(printf("RIP BOZO"));
-	printf("%p\n", &data);
 	create_window(temp);
-	system("leaks so_long");
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: fcasaubo <fcasaubo@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 11:03:16 by fcasaubo          #+#    #+#             */
-/*   Updated: 2023/11/10 12:11:50 by fcasaubo         ###   ########.fr       */
+/*   Updated: 2023/11/23 13:58:00 by fcasaubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 #ifndef SO_LONG_SO_LONG_H
 #define SO_LONG_SO_LONG_H
 
-#include "get_next_line.h"
+#include "libft/get_next_line.h"
+#include "libft/libft.h"
 #include "mlx/mlx.h"
 #include <fcntl.h>
 #include <stdio.h>
@@ -30,6 +31,7 @@
 // Main struct
 typedef struct s_data
 {
+	int 	movements;
 	char	**map;
 	int 	map_y;
 	int 	map_x;
@@ -50,12 +52,17 @@ typedef struct s_list
 // MLX data structure (Sprite images)
 
 typedef struct s_images
+
 {
 
-	void	**walls;
+	void	*wall;
+	void	*left_corner;
+	void	*right_corner;
 	void	*player;
-	void	*door;
-	void	**coins;
+	void	*door_open;
+	void	*door_closed;
+	void	*coins;
+	void	*floor;
 }		t_images;
 
 // Mlx Window structure

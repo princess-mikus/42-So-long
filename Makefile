@@ -1,10 +1,7 @@
 NAME	:=	so_long
+MLX		:=	libmlx.a
+LIBFT	:=	libft.a
 FILES	:=	main				\
-			ft_strdup			\
-			ft_strlen			\
-			ft_strlcpy			\
-			get_next_line		\
-			get_next_line_utils	\
 			list_control		\
 			path_validation
 
@@ -21,15 +18,21 @@ $(OBJ_DIR):
 $(OBJ_DIR)/%.o: %.c $(OBJ_DIR)
 	@$(CC) -Wall -Wextra -Werror -Imlx -c $< -o $@ 2>/dev/null
 
-$(NAME): $(OBJ)
-	@make -C ./mlx/ && mv ./mlx/libmlx.a . 2>/dev/null
-	@$(CC) $(OBJ) -Lmlx -framework OpenGL -framework AppKit libmlx.a -o $(NAME) -g -fsanitize=address 2>/dev/null
+$(LIBFT):
+	@make -C libft/ && mv libft/$(LIBFT) $(LIBFT)
+
+$(NAME): $(LIBFT) $(OBJ)
+	@make -C ./mlx/ 1>/dev/null 2>/dev/null && mv ./mlx/libmlx.a . 2>/dev/null
+	@$(CC) $(OBJ) -Lmlx -framework OpenGL -framework AppKit $(MLX) $(LIBFT) -o $(NAME) -g -fsanitize=address 2>/dev/null
 
 clean:
 	@rm -rf obj 2>/dev/null
+	@rm $(LIBFT) 2>/dev/null
+	@make -C libft/ clean
 
 fclean: clean
 	@rm $(NAME) 2>/dev/null
+	@make -C libft/ fclean
 
 re:	fclean all
 

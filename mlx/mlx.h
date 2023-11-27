@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mlx.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fcasaubo <fcasaubo@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/20 08:10:31 by fcasaubo          #+#    #+#             */
+/*   Updated: 2023/11/20 08:13:05 by fcasaubo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 /*
 ** mlx.h for MinilibX in 
 ** 
@@ -133,7 +145,7 @@ int	mlx_destroy_image(void *mlx_ptr, void *img_ptr);
 **  generic hook system for all events, and minilibX functions that
 **    can be hooked. Some macro and defines from X11/X.h are needed here.
 */
-0
+
 int	mlx_hook(void *win_ptr, int x_event, int x_mask,
                  int (*funct)(), void *param);
 

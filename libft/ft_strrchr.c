@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fcasaubo <fcasaubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/20 19:12:21 by fcasaubo          #+#    #+#             */
-/*   Updated: 2023/10/19 15:16:47 by fcasaubo         ###   ########.fr       */
+/*   Created: 2023/05/11 10:54:41 by fcasaubo          #+#    #+#             */
+/*   Updated: 2023/05/11 10:55:34 by fcasaubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "libft.h"
 
-char	*ft_strdup(const char *s)
+char	*ft_strrchr(const char *s, int c)
 {
-	char	*s2;
-	size_t	len;
+	size_t	i;
 
-	len = ft_strlen(s);
-	s2 = malloc((len + 1) * sizeof(char));
-	if (s2 == NULL)
-		return (NULL);
-	if (s[0] != '\0')
-		ft_strlcpy(s2, s, len + 1);
-	s2[len] = '\0';
-	return (s2);
+	i = ft_strlen(s);
+	if ((unsigned char)c == '\0')
+		return (((char *)s) + i);
+	else if (c != '\0')
+		while (i-- && s[i])
+			if (s[i] == (unsigned char)c && s[i] != '\0')
+				return (((char *)s) + i);
+	return (NULL);
 }

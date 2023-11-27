@@ -1,5 +1,5 @@
 # ninja log v5
-10	136	1698055404000000000	build.ninja	3b5e2e443af9323c
+10	136	1700482164000000000	build.ninja	3b5e2e443af9323c
 2	119	1697721533000000000	CMakeFiles/So_Long.dir/main.c.o	be1bbf8783c2f9ff
 1	112	1697721551000000000	CMakeFiles/So_Long.dir/ft_strlen.c.o	83dcefabf3a703c4
 1	112	1697721551000000000	CMakeFiles/So_Long.dir/ft_strlcpy.c.o	95be144e64e92691

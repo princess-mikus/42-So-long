@@ -7,8 +7,8 @@ add_executable(So_Long main.c
         path_validation.c
         so_long.h
         list_control.c
-        get_next_line.c
-        get_next_line_utils.c
-        ft_strdup.c
-        ft_strlcpy.c
-        ft_strlen.c)
+        libft/get_next_line.c
+        libft/get_next_line_utils.c
+        libft/ft_strdup.c
+        libft/ft_strlcpy.c
+        libft/ft_strlen.c)
