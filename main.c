@@ -6,7 +6,7 @@
 /*   By: fcasaubo <fcasaubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 10:06:57 by fcasaubo          #+#    #+#             */
-/*   Updated: 2023/11/23 15:39:14 by fcasaubo         ###   ########.fr       */
+/*   Updated: 2023/11/27 16:04:41 by fcasaubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,8 +128,16 @@ void	draw_walls(t_window *win, t_data *data, t_images *images)
 			{
 				if (x == 0 && y == data->map_y - 3)
 					mlx_put_image_to_window(win->mlx, win->pointer, images->left_corner, (x * 64) + 64, (y * 64) + 64);
-				else if (x == (int) ft_strlen(data->map[y]) - 1 && y == data->map_y - 3)
+				else if (x == 0 && y == 0)
+					mlx_put_image_to_window(win->mlx, win->pointer, images->upper_left_corner, (x * 64) + 64, (y * 64) + 64);
+				else if (x == 0)
+					mlx_put_image_to_window(win->mlx, win->pointer, images->left_wall, (x * 64) + 64, (y * 64) + 64);
+				else if (x == (int)ft_strlen(data->map[y]) - 1 && y == data->map_y - 3)
 					mlx_put_image_to_window(win->mlx, win->pointer, images->right_corner, (x * 64) + 64, (y * 64) + 64);
+				else if (y == data->map_y - 3)
+					mlx_put_image_to_window(win->mlx, win->pointer, images->middle_corner, (x * 64) + 64, (y * 64) + 64);
+				else if (y == 0)
+					mlx_put_image_to_window(win->mlx, win->pointer, images->upper_middle_corner, (x * 64) + 64, (y * 64) + 64);
 				else
 					mlx_put_image_to_window(win->mlx, win->pointer, images->wall, (x * 64) + 64, (y * 64) + 64);
 			}
@@ -143,11 +151,15 @@ void	create_map(void **temp)
 {
 	t_window	*win 	= temp[0];
 	t_images	*images	= temp[2];
-
 	int a;
 	int b;
+
 	images->right_corner = mlx_xpm_file_to_image(win->mlx, "sprites/Right_corner.xpm", &a, &b);
 	images->left_corner = mlx_xpm_file_to_image(win->mlx, "sprites/Left_corner.xpm", &a, &b);
+	images->upper_left_corner = mlx_xpm_file_to_image(win->mlx, "sprites/Left_upper_corner.xpm", &a, &b);
+	images->middle_corner = mlx_xpm_file_to_image(win->mlx, "sprites/Middle_corner.xpm", &a, &b);
+	images->upper_middle_corner = mlx_xpm_file_to_image(win->mlx, "sprites/Upper_middle_corner.xpm", &a, &b);
+	images->left_wall = mlx_xpm_file_to_image(win->mlx, "sprites/Left_wall.xpm", &a, &b);
 	images->door_open = mlx_xpm_file_to_image(win->mlx, "sprites/Door_Open.xpm", &a, &b);
 	images->door_closed = mlx_xpm_file_to_image(win->mlx, "sprites/Door_Closed.xpm", &a, &b);
 	images->coins = mlx_xpm_file_to_image(win->mlx, "sprites/Coin.xpm", &a, &b);
