@@ -6,7 +6,7 @@
 /*   By: fcasaubo <fcasaubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 10:06:57 by fcasaubo          #+#    #+#             */
-/*   Updated: 2023/11/27 16:04:41 by fcasaubo         ###   ########.fr       */
+/*   Updated: 2023/11/28 16:10:27 by fcasaubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,60 @@ int map_validator(t_data *data)
 		return (0);
 	return (1);
 }
+/*
+void	draw_pillars(t_data	*data, t_window	*win, t_images *images, int x, int y)
+{
+	while(data->map[x][y + 1] == '1')
+		y++;
+	mlx_put_image_to_window(win->mlx, win->pointer, images->pillar_base, (x * 64) + 64, ( * 64) + 64);
+	data->map[x][y] = '2';
+	while (data->map[y + 1] == '1')
+		mlx_put_image_to_window(win->mlx, win->pointer, images->pillar_middle, (x * 64) + 64, (y * 64) + 64);
+	mlx_put_image_to_window(win->mlx, win->pointer, images->pillar_top, (x * 64) + 64, (y * 64) + 64);
+	data->map[x][y] = '2';
+}
+*/
+void	draw_walls(t_window *win, t_data *data, t_images *images)
+{
+	int y;
+	int	x;
+	int coord[2];
+
+	y = data->map_y - 3;
+	while (y >= 0)
+	{
+		x = (int)ft_strlen(data->map[y]);
+		while (x >= 0)
+		{
+			if (data->map[y][x] == '1')
+			{
+				if (x == 0 && y == data->map_y - 3)
+					mlx_put_image_to_window(win->mlx, win->pointer, images->left_corner, (x * 64) + 64, (y * 64) + 64);
+				else if (x == 0 && y == 0)
+					mlx_put_image_to_window(win->mlx, win->pointer, images->upper_left_corner, (x * 64) + 64, (y * 64) + 64);
+				else if (x == 0)
+					mlx_put_image_to_window(win->mlx, win->pointer, images->left_wall, (x * 64) + 64, (y * 64) + 64);
+				else if (x == (int)ft_strlen(data->map[y]) - 1 && y == data->map_y - 3)
+					mlx_put_image_to_window(win->mlx, win->pointer, images->right_corner, (x * 64) + 64, (y * 64) + 64);
+				else if (x == (int)ft_strlen(data->map[y]) - 1 && y == 0)
+					mlx_put_image_to_window(win->mlx, win->pointer, images->upper_right_corner, (x * 64) + 64, (y * 64) + 64);
+				else if (x == (int)ft_strlen(data->map[y]) - 1)
+					mlx_put_image_to_window(win->mlx, win->pointer, images->right_wall, (x * 64) + 64, (y * 64) + 64);
+				else if (y == data->map_y - 3)
+					mlx_put_image_to_window(win->mlx, win->pointer, images->middle_corner, (x * 64) + 64, (y * 64) + 64);
+				else if (y == 0)
+					mlx_put_image_to_window(win->mlx, win->pointer, images->upper_middle_corner, (x * 64) + 64, (y * 64) + 64);
+				else
+				{
+					mlx_put_image_to_window(win->mlx, win->pointer, images->floor, (x * 64) + 64, (y * 64) + 64);
+					draw_pillars(data, win, images, x, y);
+				}
+			}
+			x--;
+		}
+		y--;
+	}
+}
 
 void	update_map(t_window *win, t_data *data, t_images *images)
 {
@@ -111,40 +165,7 @@ void	update_map(t_window *win, t_data *data, t_images *images)
 		x = 0;
 		y++;
 	}
-}
-
-void	draw_walls(t_window *win, t_data *data, t_images *images)
-{
-	int y;
-	int	x;
-
-	y = 0;
-	while (data->map[y])
-	{
-		x = 0;
-		while (data->map[y][x])
-		{
-			if (data->map[y][x] == '1')
-			{
-				if (x == 0 && y == data->map_y - 3)
-					mlx_put_image_to_window(win->mlx, win->pointer, images->left_corner, (x * 64) + 64, (y * 64) + 64);
-				else if (x == 0 && y == 0)
-					mlx_put_image_to_window(win->mlx, win->pointer, images->upper_left_corner, (x * 64) + 64, (y * 64) + 64);
-				else if (x == 0)
-					mlx_put_image_to_window(win->mlx, win->pointer, images->left_wall, (x * 64) + 64, (y * 64) + 64);
-				else if (x == (int)ft_strlen(data->map[y]) - 1 && y == data->map_y - 3)
-					mlx_put_image_to_window(win->mlx, win->pointer, images->right_corner, (x * 64) + 64, (y * 64) + 64);
-				else if (y == data->map_y - 3)
-					mlx_put_image_to_window(win->mlx, win->pointer, images->middle_corner, (x * 64) + 64, (y * 64) + 64);
-				else if (y == 0)
-					mlx_put_image_to_window(win->mlx, win->pointer, images->upper_middle_corner, (x * 64) + 64, (y * 64) + 64);
-				else
-					mlx_put_image_to_window(win->mlx, win->pointer, images->wall, (x * 64) + 64, (y * 64) + 64);
-			}
-			x++;
-		}
-		y++;
-	}
+	draw_walls(win, data, images);
 }
 
 void	create_map(void **temp)
@@ -160,14 +181,15 @@ void	create_map(void **temp)
 	images->middle_corner = mlx_xpm_file_to_image(win->mlx, "sprites/Middle_corner.xpm", &a, &b);
 	images->upper_middle_corner = mlx_xpm_file_to_image(win->mlx, "sprites/Upper_middle_corner.xpm", &a, &b);
 	images->left_wall = mlx_xpm_file_to_image(win->mlx, "sprites/Left_wall.xpm", &a, &b);
+	images->right_wall = mlx_xpm_file_to_image(win->mlx, "sprites/Right_wall.xpm", &a, &b);
 	images->door_open = mlx_xpm_file_to_image(win->mlx, "sprites/Door_Open.xpm", &a, &b);
 	images->door_closed = mlx_xpm_file_to_image(win->mlx, "sprites/Door_Closed.xpm", &a, &b);
 	images->coins = mlx_xpm_file_to_image(win->mlx, "sprites/Coin.xpm", &a, &b);
 	images->player = mlx_xpm_file_to_image(win->mlx, "sprites/TEMMIE.xpm", &a, &b);
 	images->floor = mlx_xpm_file_to_image(win->mlx, "sprites/Floor_placeholder.xpm", &a, &b);
-	images->wall = mlx_xpm_file_to_image(win->mlx, "sprites/Wall_temp.xpm", &a, &b);
+	images->wall = mlx_xpm_file_to_image(win->mlx, "sprites/Statue.xpm", &a, &b);
+	images->upper_right_corner = mlx_xpm_file_to_image(win->mlx, "sprites/Right_upper_corner.xpm", &a, &b);
 	// Remember to do a function that draw walls, as they don't change really
-	draw_walls(temp[0], temp[1], temp[2]);
 	update_map(temp[0], temp[1], temp[2]);
 }
 
@@ -177,6 +199,7 @@ int	key_hook(int keycode, void **temp)
 	int y;
 	//t_window	*win 	= temp[0];
 	t_data		*data 	= temp[1];
+	//t_images 	*images = temp[2];
 
 	x = data->player_x;
 	y = data->player_y;
@@ -278,12 +301,6 @@ void	create_window(void **temp)
 	mlx_key_hook(win->pointer, key_hook, temp);
 	mlx_loop(win->mlx);
 }
-
-/*
-
-
-
-*/
 
 int main(int argc, char **argv)
 {

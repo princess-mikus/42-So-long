@@ -6,7 +6,7 @@
 /*   By: fcasaubo <fcasaubo@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 11:03:16 by fcasaubo          #+#    #+#             */
-/*   Updated: 2023/11/27 15:26:53 by fcasaubo         ###   ########.fr       */
+/*   Updated: 2023/11/28 15:06:31 by fcasaubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,10 @@ typedef struct s_images
 	void	*right_corner;
 	void	*middle_corner;
 	void	*upper_left_corner;
+	void	*upper_right_corner;
 	void	*upper_middle_corner;
 	void	*left_wall;
+	void	*right_wall;
 	void	*player;
 	void	*door_open;
 	void	*door_closed;
