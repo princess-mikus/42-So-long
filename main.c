@@ -6,7 +6,7 @@
 /*   By: fcasaubo <fcasaubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 10:06:57 by fcasaubo          #+#    #+#             */
-/*   Updated: 2023/11/28 16:10:27 by fcasaubo         ###   ########.fr       */
+/*   Updated: 2023/11/29 14:26:59 by fcasaubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	draw_walls(t_window *win, t_data *data, t_images *images)
 {
 	int y;
 	int	x;
-	int coord[2];
+	//int coord[2];
 
 	y = data->map_y - 3;
 	while (y >= 0)
@@ -125,7 +125,7 @@ void	draw_walls(t_window *win, t_data *data, t_images *images)
 				else
 				{
 					mlx_put_image_to_window(win->mlx, win->pointer, images->floor, (x * 64) + 64, (y * 64) + 64);
-					draw_pillars(data, win, images, x, y);
+					//draw_pillars(data, win, images, x, y);
 				}
 			}
 			x--;

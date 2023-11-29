@@ -11,4 +11,4 @@ add_executable(So_Long main.c
         libft/get_next_line_utils.c
         libft/ft_strdup.c
         libft/ft_strlcpy.c
-        libft/ft_strlen.c)
+        libft/ft_strlen.c map_modification.c)
