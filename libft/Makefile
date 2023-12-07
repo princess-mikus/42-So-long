@@ -6,7 +6,7 @@
 #    By: fcasaubo <fcasaubo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/11 11:53:01 by fcasaubo          #+#    #+#              #
-#    Updated: 2023/05/17 10:41:47 by fcasaubo         ###   ########.fr        #
+#    Updated: 2023/12/07 15:33:19 by fcasaubo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,17 @@ SRC 	:=				\
 	ft_putstr_fd.c		\
 	ft_putendl_fd.c		\
 	ft_putnbr_fd.c		\
+	ft_putnbrpf_fd.c	\
+	ft_printf.c			\
+	ft_putnbr_hex_fd.c	\
+	ft_putnbru_fd.c 	\
+	ft_putaddress_fd.c	\
+	ft_write_character.c\
+	ft_write_string.c	\
+	ft_write_address.c	\
+	ft_write_number.c	\
+	ft_write_unsigned.c	\
+	ft_write_hex.c		\
 	get_next_line.c		\
 	get_next_line_utils.c
 BSRC	:=				\

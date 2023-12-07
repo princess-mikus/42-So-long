@@ -3,7 +3,8 @@ MLX		:=	libmlx.a
 LIBFT	:=	libft.a
 FILES	:=	main				\
 			list_control		\
-			path_validation
+			path_validation		\
+			movement
 
 CC		:=	gcc
 OBJ_DIR	:=	obj

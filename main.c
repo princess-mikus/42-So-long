@@ -6,7 +6,7 @@
 /*   By: fcasaubo <fcasaubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 10:06:57 by fcasaubo          #+#    #+#             */
-/*   Updated: 2023/11/29 14:26:59 by fcasaubo         ###   ########.fr       */
+/*   Updated: 2023/12/07 15:51:40 by fcasaubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int wall_validator(char **map)
 	return (1);
 }
 
-int map_validator(t_data *data)
+int	map_validator(t_data *data)
 {
 	if (!wall_validator(data->map))
 		return (0);
@@ -84,11 +84,11 @@ void	draw_pillars(t_data	*data, t_window	*win, t_images *images, int x, int y)
 {
 	while(data->map[x][y + 1] == '1')
 		y++;
-	mlx_put_image_to_window(win->mlx, win->pointer, images->pillar_base, (x * 64) + 64, ( * 64) + 64);
+	mlx_put_image_to_window(win->mlx, win->ptr, images->pillar_base, (x * 64) + 64, ( * 64) + 64);
 	data->map[x][y] = '2';
 	while (data->map[y + 1] == '1')
-		mlx_put_image_to_window(win->mlx, win->pointer, images->pillar_middle, (x * 64) + 64, (y * 64) + 64);
-	mlx_put_image_to_window(win->mlx, win->pointer, images->pillar_top, (x * 64) + 64, (y * 64) + 64);
+		mlx_put_image_to_window(win->mlx, win->ptr, images->pillar_middle, (x * 64) + 64, (y * 64) + 64);
+	mlx_put_image_to_window(win->mlx, win->ptr, images->pillar_top, (x * 64) + 64, (y * 64) + 64);
 	data->map[x][y] = '2';
 }
 */
@@ -107,24 +107,24 @@ void	draw_walls(t_window *win, t_data *data, t_images *images)
 			if (data->map[y][x] == '1')
 			{
 				if (x == 0 && y == data->map_y - 3)
-					mlx_put_image_to_window(win->mlx, win->pointer, images->left_corner, (x * 64) + 64, (y * 64) + 64);
+					mlx_put_image_to_window(win->mlx, win->ptr, images->left_corner, (x * 64) + 64, (y * 64) + 64);
 				else if (x == 0 && y == 0)
-					mlx_put_image_to_window(win->mlx, win->pointer, images->upper_left_corner, (x * 64) + 64, (y * 64) + 64);
+					mlx_put_image_to_window(win->mlx, win->ptr, images->upper_left_corner, (x * 64) + 64, (y * 64) + 64);
 				else if (x == 0)
-					mlx_put_image_to_window(win->mlx, win->pointer, images->left_wall, (x * 64) + 64, (y * 64) + 64);
+					mlx_put_image_to_window(win->mlx, win->ptr, images->left_wall, (x * 64) + 64, (y * 64) + 64);
 				else if (x == (int)ft_strlen(data->map[y]) - 1 && y == data->map_y - 3)
-					mlx_put_image_to_window(win->mlx, win->pointer, images->right_corner, (x * 64) + 64, (y * 64) + 64);
+					mlx_put_image_to_window(win->mlx, win->ptr, images->right_corner, (x * 64) + 64, (y * 64) + 64);
 				else if (x == (int)ft_strlen(data->map[y]) - 1 && y == 0)
-					mlx_put_image_to_window(win->mlx, win->pointer, images->upper_right_corner, (x * 64) + 64, (y * 64) + 64);
+					mlx_put_image_to_window(win->mlx, win->ptr, images->upper_right_corner, (x * 64) + 64, (y * 64) + 64);
 				else if (x == (int)ft_strlen(data->map[y]) - 1)
-					mlx_put_image_to_window(win->mlx, win->pointer, images->right_wall, (x * 64) + 64, (y * 64) + 64);
+					mlx_put_image_to_window(win->mlx, win->ptr, images->right_wall, (x * 64) + 64, (y * 64) + 64);
 				else if (y == data->map_y - 3)
-					mlx_put_image_to_window(win->mlx, win->pointer, images->middle_corner, (x * 64) + 64, (y * 64) + 64);
+					mlx_put_image_to_window(win->mlx, win->ptr, images->middle_corner, (x * 64) + 64, (y * 64) + 64);
 				else if (y == 0)
-					mlx_put_image_to_window(win->mlx, win->pointer, images->upper_middle_corner, (x * 64) + 64, (y * 64) + 64);
+					mlx_put_image_to_window(win->mlx, win->ptr, images->upper_middle_corner, (x * 64) + 64, (y * 64) + 64);
 				else
 				{
-					mlx_put_image_to_window(win->mlx, win->pointer, images->floor, (x * 64) + 64, (y * 64) + 64);
+					mlx_put_image_to_window(win->mlx, win->ptr, images->floor, (x * 64) + 64, (y * 64) + 64);
 					//draw_pillars(data, win, images, x, y);
 				}
 			}
@@ -148,18 +148,18 @@ void	update_map(t_window *win, t_data *data, t_images *images)
 			if (data->map[y][x] == 'D' && data->coins < 1)
 				exit (0);
 			else if (data->map[y][x] != '1' && data->map[y][x] != '\n')
-				mlx_put_image_to_window(win->mlx, win->pointer, images->floor, (x * 64) + 64, (y * 64) + 64);
+				mlx_put_image_to_window(win->mlx, win->ptr, images->floor, (x * 64) + 64, (y * 64) + 64);
 			if (data->map[y][x] == 'E' || data->map[y][x] == 'D')
 			{
 				if (data->coins == 0)
-					mlx_put_image_to_window(win->mlx, win->pointer, images->door_open, (x * 64) + 64, (y * 64) + 64 - 20);
+					mlx_put_image_to_window(win->mlx, win->ptr, images->door_open, (x * 64) + 64, (y * 64) + 64 - 20);
 				else
-					mlx_put_image_to_window(win->mlx, win->pointer, images->door_closed, (x * 64) + 64, (y * 64) + 64 - 20);
+					mlx_put_image_to_window(win->mlx, win->ptr, images->door_closed, (x * 64) + 64, (y * 64) + 64 - 20);
 			}
 			if (data->map[y][x] == 'P' || data->map[y][x] == 'D')
-				mlx_put_image_to_window(win->mlx, win->pointer, images->player, (x * 64) + 64, (y * 64) + 64);
+				mlx_put_image_to_window(win->mlx, win->ptr, images->player, (x * 64) + 64, (y * 64) + 64);
 			if (data->map[y][x] == 'C')
-				mlx_put_image_to_window(win->mlx, win->pointer, images->coins, (x * 64) + 64, (y * 64) + 64);
+				mlx_put_image_to_window(win->mlx, win->ptr, images->coins, (x * 64) + 64, (y * 64) + 64);
 			x++;
 		}
 		x = 0;
@@ -168,137 +168,76 @@ void	update_map(t_window *win, t_data *data, t_images *images)
 	draw_walls(win, data, images);
 }
 
+void	init_outter_walls(t_window *win, t_images *images)
+{
+	int	a;
+	int	b;
+
+	images->right_corner = \
+	mlx_xpm_file_to_image(win->mlx, "sprites/Right_corner.xpm", &a, &b);
+	images->left_corner = \
+	mlx_xpm_file_to_image(win->mlx, "sprites/Left_corner.xpm", &a, &b);
+	images->upper_left_corner = \
+	mlx_xpm_file_to_image(win->mlx, "sprites/Left_upper_corner.xpm", &a, &b);
+	images->middle_corner = \
+	mlx_xpm_file_to_image(win->mlx, "sprites/Middle_corner.xpm", &a, &b);
+	images->upper_middle_corner = \
+	mlx_xpm_file_to_image(win->mlx, "sprites/Upper_middle_corner.xpm", &a, &b);
+	images->left_wall = \
+	mlx_xpm_file_to_image(win->mlx, "sprites/Left_wall.xpm", &a, &b);
+	images->right_wall = \
+	mlx_xpm_file_to_image(win->mlx, "sprites/Right_wall.xpm", &a, &b);
+}
+
 void	create_map(void **temp)
 {
-	t_window	*win 	= temp[0];
-	t_images	*images	= temp[2];
-	int a;
-	int b;
+	t_window	*win;
+	t_images	*images;
+	int			a;
+	int			b;
 
-	images->right_corner = mlx_xpm_file_to_image(win->mlx, "sprites/Right_corner.xpm", &a, &b);
-	images->left_corner = mlx_xpm_file_to_image(win->mlx, "sprites/Left_corner.xpm", &a, &b);
-	images->upper_left_corner = mlx_xpm_file_to_image(win->mlx, "sprites/Left_upper_corner.xpm", &a, &b);
-	images->middle_corner = mlx_xpm_file_to_image(win->mlx, "sprites/Middle_corner.xpm", &a, &b);
-	images->upper_middle_corner = mlx_xpm_file_to_image(win->mlx, "sprites/Upper_middle_corner.xpm", &a, &b);
-	images->left_wall = mlx_xpm_file_to_image(win->mlx, "sprites/Left_wall.xpm", &a, &b);
-	images->right_wall = mlx_xpm_file_to_image(win->mlx, "sprites/Right_wall.xpm", &a, &b);
-	images->door_open = mlx_xpm_file_to_image(win->mlx, "sprites/Door_Open.xpm", &a, &b);
-	images->door_closed = mlx_xpm_file_to_image(win->mlx, "sprites/Door_Closed.xpm", &a, &b);
-	images->coins = mlx_xpm_file_to_image(win->mlx, "sprites/Coin.xpm", &a, &b);
-	images->player = mlx_xpm_file_to_image(win->mlx, "sprites/TEMMIE.xpm", &a, &b);
-	images->floor = mlx_xpm_file_to_image(win->mlx, "sprites/Floor_placeholder.xpm", &a, &b);
-	images->wall = mlx_xpm_file_to_image(win->mlx, "sprites/Statue.xpm", &a, &b);
-	images->upper_right_corner = mlx_xpm_file_to_image(win->mlx, "sprites/Right_upper_corner.xpm", &a, &b);
+	win = temp[0];
+	images = temp[2];
+	images->door_open = \
+	mlx_xpm_file_to_image(win->mlx, "sprites/Door_Open.xpm", &a, &b);
+	images->door_closed = \
+	mlx_xpm_file_to_image(win->mlx, "sprites/Door_Closed.xpm", &a, &b);
+	images->coins = \
+	mlx_xpm_file_to_image(win->mlx, "sprites/Coin.xpm", &a, &b);
+	images->player = \
+	mlx_xpm_file_to_image(win->mlx, "sprites/TEMMIE.xpm", &a, &b);
+	images->floor = \
+	mlx_xpm_file_to_image(win->mlx, "sprites/Floor_placeholder.xpm", &a, &b);
+	images->wall = \
+	mlx_xpm_file_to_image(win->mlx, "sprites/Statue.xpm", &a, &b);
+	images->upper_right_corner = \
+	mlx_xpm_file_to_image(win->mlx, "sprites/Right_upper_corner.xpm", &a, &b);
 	// Remember to do a function that draw walls, as they don't change really
+	init_outter_walls(win, images);
 	update_map(temp[0], temp[1], temp[2]);
 }
 
-int	key_hook(int keycode, void **temp)
-{
-	int x;
-	int y;
-	//t_window	*win 	= temp[0];
-	t_data		*data 	= temp[1];
-	//t_images 	*images = temp[2];
-
-	x = data->player_x;
-	y = data->player_y;
-	if (keycode == 53)
-	{
-		printf("bYE!!!\n"); // REEMPLAZAR POR FT_PRINTF
-		exit (0);
-	}
-	if (keycode == 126 && data->map[y - 1][x] != '1')
-	{
-		if (data->map[y - 1][x] == 'E')
-			data->map[y - 1][x] = 'D';
-		else
-		{
-			if (data->map[y - 1][x] == 'C')
-				data->coins--;
-			data->map[y - 1][x] = 'P';
-		}
-		data->player_y--;
-		if (data->map[y][x] != 'D')
-			data->map[y][x] = '0';
-		else
-			data->map[y][x] = 'E';
-		update_map(temp[0], temp[1], temp[2]);
-	}
-	if (keycode == 125 && data->map[y + 1][x] != '1')
-	{
-		if (data->map[y + 1][x] == 'E')
-			data->map[y + 1][x] = 'D';
-		else
-		{
-			if (data->map[y + 1][x] == 'C')
-				data->coins--;
-			data->map[y + 1][x]= 'P';
-		}
-		data->player_y++;
-		if (data->map[y][x] != 'D')
-			data->map[y][x] = '0';
-		else
-			data->map[y][x] = 'E';
-		update_map(temp[0], temp[1], temp[2]);
-	}
-	if (keycode == 123 && data->map[y][x - 1] != '1')
-	{
-		if (data->map[y][x - 1] == 'E')
-			data->map[y][x - 1] = 'D';
-		else
-		{
-			if (data->map[y][x - 1] == 'C')
-				data->coins--;
-			data->map[y][x - 1] = 'P';
-		}
-		data->player_x--;
-		if (data->map[y][x] != 'D')
-			data->map[y][x] = '0';
-		else
-			data->map[y][x] = 'E';
-		update_map(temp[0], temp[1], temp[2]);
-	}
-	if (keycode == 124 && data->map[y][x + 1] != '1')
-	{
-		if (data->map[y][x + 1] == 'E')
-			data->map[y][x + 1] = 'D';
-		else
-		{
-			if (data->map[y][x + 1] == 'C')
-				data->coins--;
-			data->map[y][x + 1] = 'P';
-		}
-		data->player_x++;
-		if (data->map[y][x] != 'D')
-			data->map[y][x] = '0';
-		else
-			data->map[y][x] = 'E';
-		update_map(temp[0], temp[1], temp[2]);
-	}
-	if (x != data->player_x || y != data->player_y)
-		printf("%d\n", data->movements++); // REEMPLAZAR POR FT_PRINTF
-	return (keycode);
-}
-
-
 void	create_window(void **temp)
 {
-	t_window	*win 	= temp[0];
-	t_data		*data 	= temp[1];
-	t_images	*images	= temp[2];
+	t_window	*win;
+	t_data		*data;
+	t_images	*images;
 
+	win = temp[0];
+	data = temp[1];
+	images = temp[2];
 	win->size_x = data->map_x * 64;
 	win->size_y = data->map_y * 64;
 	win->mlx = mlx_init();
-	win->pointer = mlx_new_window(win->mlx, win->size_x, win->size_y, "hOI!!! i'm TEMMIE!!");
-	win->background = mlx_xpm_file_to_image(win->mlx, "sprites/Background.xpm", &win->background_x, &win->background_y);
-	mlx_put_image_to_window(win->mlx, win->pointer, win->background, 0, 0);
+	win->ptr = \
+	mlx_new_window(win->mlx, win->size_x, win->size_y, "hOI!!! i'm TEMMIE!!");
+	win->background = mlx_xpm_file_to_image \
+	(win->mlx, "sprites/Background.xpm", &win->bg_x, &win->bg_y);
+	mlx_put_image_to_window(win->mlx, win->ptr, win->background, 0, 0);
 	images->coins = malloc((data->coins) * sizeof(void *));
 	images->floor = malloc(4096 * sizeof(void *));
 	create_map(temp);
-	//mlx_loop_hook(win->mlx, update_map, temp);
-	mlx_key_hook(win->pointer, key_hook, temp);
+	mlx_key_hook(win->ptr, key_hook, temp);
 	mlx_loop(win->mlx);
 }
 
@@ -309,14 +248,13 @@ int main(int argc, char **argv)
 	t_data		data;
 	t_window	win;
 	t_images	images;
-	void	**temp = malloc(3 * sizeof(void *));
-	char	*temp2;
+	void		*temp[3];
+	char		*temp2;
 
 	data.movements = 1;
 	temp[0] = &win;
 	temp[1] = &data;
 	temp[2] = &images;
-	i = 0;
 	if (argc > 2)
 		return(perror(strerror(E2BIG)), 1);
 	if (argc < 2)
@@ -325,16 +263,22 @@ int main(int argc, char **argv)
 	if (fd < 0)
 		return (perror(strerror(ENOENT)), 1);
 	data.map = malloc(4096 * sizeof(char **)); // Temporal, reemplazar por listas
+	i = 0;
 	temp2 = get_next_line(fd);
 	data.map[i] = ft_strtrim(temp2, "\n");
 	free(temp2);
 	data.map_y = 2;
-	while(data.map[i] != NULL)
+	while (data.map[i] != NULL)
 	{
 		temp2 = get_next_line(fd);
 		data.map[++i] = ft_strtrim(temp2, "\n");
 		free(temp2);
 		data.map_y++;
+	}
+	i = 0;
+	while (data.map[i])
+	{
+		printf("%s\n", data.map[i++]);
 	}
 	data.map_x = (int)ft_strlen(data.map[0]) + 2;
 	if (!map_validator(&data))
