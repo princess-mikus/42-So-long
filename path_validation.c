@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   path_validation.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcasaubo <fcasaubo@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: fcasaubo <fcasaubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 10:48:07 by fcasaubo          #+#    #+#             */
-/*   Updated: 2023/11/20 09:36:11 by fcasaubo         ###   ########.fr       */
+/*   Updated: 2023/12/12 19:08:43 by fcasaubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void search_exit(t_data *data, char **map, t_list **positions)
+void	search_exit(t_data *data, char **map, t_list **positions)
 {
-	int 	x;
-	int 	y;
+	int		x;
+	int		y;
 	t_list	*to_check;
 
 	to_check = *positions;
@@ -45,7 +45,7 @@ int	path_validator(t_data *data)
 {
 	t_list	**positions;
 	char	**map;
-	int 	i;
+	int		i;
 	t_data	data_copy;
 
 	data_copy = *data;

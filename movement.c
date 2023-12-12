@@ -6,7 +6,7 @@
 /*   By: fcasaubo <fcasaubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 11:52:14 by fcasaubo          #+#    #+#             */
-/*   Updated: 2023/12/05 12:24:29 by fcasaubo         ###   ########.fr       */
+/*   Updated: 2023/12/12 19:50:13 by fcasaubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,13 +108,13 @@ void	movement_right(t_data *data, int x, int y)
 		data->map[y][x] = '0';
 }
 
-int	key_hook(int keycode, void **temp)
+int	key_hook(int keycode, void **structures)
 {
 	int		x;
 	int		y;
 	t_data	*data;
 
-	data = temp[1];
+	data = structures[1];
 	x = data->player_x;
 	y = data->player_y;
 	if (keycode == 53)
@@ -127,11 +127,12 @@ int	key_hook(int keycode, void **temp)
 		movement_left(data, x, y);
 	if (keycode == 2 && data->map[y][x + 1] != '1')
 		movement_right(data, x, y);
+	check_win(structures[0], structures[1], structures[2]);
 	if (x != data->player_x || y != data->player_y)
 	{
 		if (data->movements < INT_MAX)
-			ft_printf("%d\n", ++data->movements);
-		update_map(temp[0], temp[1], temp[2]);
+			ft_printf("%d\n", data->movements++);
+		update_map(structures[0], structures[1], structures[2]);
 	}
 	return (keycode);
 }

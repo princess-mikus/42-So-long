@@ -6,7 +6,7 @@
 #    By: fcasaubo <fcasaubo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/11 11:53:01 by fcasaubo          #+#    #+#              #
-#    Updated: 2023/12/07 15:33:19 by fcasaubo         ###   ########.fr        #
+#    Updated: 2023/12/12 19:18:49 by fcasaubo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,6 +75,8 @@ BOBJ	:= $(BSRC:.c=.o)
 
 GCC		:= gcc
 FLG		:= -Wall -Wextra -Werror
+
+.SILENT:
 
 all: $(NAME)
 

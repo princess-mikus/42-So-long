@@ -6,7 +6,7 @@
 /*   By: fcasaubo <fcasaubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 11:03:16 by fcasaubo          #+#    #+#             */
-/*   Updated: 2023/12/07 15:39:12 by fcasaubo         ###   ########.fr       */
+/*   Updated: 2023/12/12 19:41:13 by fcasaubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 // Main struct
 typedef struct s_data
 {
+	int		players;
 	int		movements;
 	char	**map;
 	int		map_y;
@@ -42,6 +43,12 @@ typedef struct s_data
 	int		player_x;
 	int		player_y;
 }		t_data;
+
+typedef struct s_temp_list
+{
+	char	*line;
+	void	*next;
+}		t_temp_list;
 
 // Validator lists
 typedef struct s_list
@@ -68,6 +75,7 @@ typedef struct s_images
 	void	*door_open;
 	void	*door_closed;
 	void	*coins;
+	void	*coins_taken;
 	void	*floor;
 }		t_images;
 
@@ -84,20 +92,36 @@ typedef struct s_window
 	int		bg_y;
 }	t_window;
 
+// Import map to structure
+void	import_map(t_data *data, int fd);
+
 // Simple map validation
 int		map_validator(t_data *data);
-int		duplicate_validator(t_data *data);
-int		wall_validator(char **map);
 
 // Map playability validation
-void	search_exit(t_data *data, char **map, t_list **positions);
 int		path_validator(t_data *data);
 
 // List Control
 t_list	*sl_lstnew(int y, int x);
 void	sl_lstadd_front(t_list **lst, t_list *new);
 void	sl_lstadd_back(t_list **lst, t_list *new);
+
+// Function hooked to key events
 int		key_hook(int keycode, void **temp);
+
+// Outter wall drawing
+void	draw_outter_walls(t_window *win, t_data *data, t_images *images);
+
+// Replacing mlx_put_image 'cause it's too long for Normie
+void	put_image(t_window	*win, void	*img, int x, int y);
+
+// Map Drawing
 void	update_map(t_window *win, t_data *data, t_images *images);
+
+// Check if player won, then proceeds to free everything
+void	check_win(t_window *win, t_data *data, t_images *images);
+
+// Utils
+void	free_array(void **array);
 
 #endif //SO_LONG_H
