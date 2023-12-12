@@ -1,6 +1,0 @@
-/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "Unix Makefiles" -S /Users/fcasaubo/CLionProjects/So_Long -B /Users/fcasaubo/CLionProjects/So_Long/cmake-build-debug_make
-CMake Error at CMakeLists.txt:1 (cmake_minimum_required):
-  CMake 3.26 or higher is required.  You are running version 3.25.2
-
-
--- Configuring incomplete, errors occurred!
