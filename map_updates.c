@@ -6,7 +6,7 @@
 /*   By: fcasaubo <fcasaubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 17:37:45 by fcasaubo          #+#    #+#             */
-/*   Updated: 2023/12/12 18:09:17 by fcasaubo         ###   ########.fr       */
+/*   Updated: 2023/12/13 13:56:20 by fcasaubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ void	update_map(t_window *win, t_data *data, t_images *images)
 		{
 			if (data->map[y][x] != '1' && data->map[y][x] != '\n')
 				put_image(win, images->floor, x, y);
-			if ((data->map[y][x] == 'E' || data->map[y][x] == 'D') \
-				&& data->coins == 0)
+			if (data->map[y][x] == 'E' && data->coins == 0)
 				put_image(win, images->door_open, x, y);
 			else if (data->map[y][x] == 'E' || data->map[y][x] == 'D')
 				put_image(win, images->door_closed, x, y);
@@ -39,4 +38,5 @@ void	update_map(t_window *win, t_data *data, t_images *images)
 				put_image(win, images->coins, x, y);
 		}
 	}
+	draw_inner_walls(win, data, images);
 }

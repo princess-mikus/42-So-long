@@ -1,17 +1,5 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: fcasaubo <fcasaubo@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/07 11:03:16 by fcasaubo          #+#    #+#             */
-/*   Updated: 2023/12/13 15:43:31 by fcasaubo         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#ifndef SO_LONG_BONUS_H
+# define SO_LONG_BONUS_H
 
 # include "libft/get_next_line.h"
 # include "libft/libft.h"

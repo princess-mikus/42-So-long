@@ -6,11 +6,33 @@
 /*   By: fcasaubo <fcasaubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:33:39 by fcasaubo          #+#    #+#             */
-/*   Updated: 2023/12/12 19:41:05 by fcasaubo         ###   ########.fr       */
+/*   Updated: 2023/12/13 13:58:45 by fcasaubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	draw_inner_walls(t_window *win, t_data *data, t_images *images)
+{
+	int	y;
+	int	x;
+
+	y = 1;
+	while (data->map[y + 1])
+	{
+		x = 1;
+		while (data->map[y][x + 1])
+		{
+			if (data->map[y][x] == '1')
+			{
+				put_image(win, images->floor, x, y);
+				put_image(win, images->wall, x, y);
+			}
+			x++;
+		}
+		y++;
+	}
+}
 
 void	draw_wall(t_window *win, t_data *data, \
 		t_images *images, int *coordinates)
@@ -41,7 +63,7 @@ void	draw_wall(t_window *win, t_data *data, \
 	}
 }
 
-void	init_outter_walls(t_window *win, t_images *images)
+void	init_walls(t_window *win, t_images *images)
 {
 	int	a;
 	int	b;
@@ -60,6 +82,8 @@ void	init_outter_walls(t_window *win, t_images *images)
 	mlx_xpm_file_to_image(win->mlx, "sprites/Left_wall.xpm", &a, &b);
 	images->right_wall = \
 	mlx_xpm_file_to_image(win->mlx, "sprites/Right_wall.xpm", &a, &b);
+	images->wall = \
+	mlx_xpm_file_to_image(win->mlx, "sprites/Wall.xpm", &a, &b);
 }
 
 void	draw_outter_walls(t_window *win, t_data *data, t_images *images)
@@ -69,7 +93,7 @@ void	draw_outter_walls(t_window *win, t_data *data, t_images *images)
 	int	coordinates[2];
 
 	y = -1;
-	init_outter_walls(win, images);
+	init_walls(win, images);
 	while (data->map[++y])
 	{
 		x = -1;

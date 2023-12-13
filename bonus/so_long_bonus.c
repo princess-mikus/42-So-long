@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   so_long_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fcasaubo <fcasaubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/05 10:06:57 by fcasaubo          #+#    #+#             */
-/*   Updated: 2023/12/13 13:59:50 by fcasaubo         ###   ########.fr       */
+/*   Created: 2023/12/12 19:42:35 by fcasaubo          #+#    #+#             */
+/*   Updated: 2023/12/13 15:36:59 by fcasaubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,11 @@ void	create_window(void **structures)
 	win->background = mlx_xpm_file_to_image \
 	(win->mlx, "sprites/Background.xpm", &win->bg_x, &win->bg_y);
 	put_image(win, win->background, 0, 0);
+	images->coins = malloc((data->coins) * sizeof(void *));
+	images->floor = malloc(4096 * sizeof(void *));
 	create_map(structures);
 	mlx_key_hook(win->ptr, key_hook, structures);
+	mlx_loop_hook(win->ptr, loop_hook, structures);
 	mlx_loop(win->mlx);
 }
 
@@ -103,11 +106,12 @@ int	main(int argc, char **argv)
 	argument_checker(argc, argv);
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
-		return (ft_printf("So long: Error, map not found"));
+		return (perror(strerror(ENOENT)), 1);
 	import_map(&data, fd);
 	data.map_x = (int)ft_strlen(data.map[0]) + 2;
 	if (!map_validator(&data))
 		return (-1);
 	create_window(structures);
+	printf("I AM INDEED A BONUS");
 	return (0);
 }

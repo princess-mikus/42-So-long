@@ -6,11 +6,25 @@
 /*   By: fcasaubo <fcasaubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 13:58:40 by fcasaubo          #+#    #+#             */
-/*   Updated: 2023/12/12 19:26:53 by fcasaubo         ###   ########.fr       */
+/*   Updated: 2023/12/13 14:16:38 by fcasaubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	check_valid_symbols(t_data *data, int x, int y)
+{
+	if (data->map[y][x] != '1' && \
+		data->map[y][x] != '0' && \
+		data->map[y][x] != 'C' && \
+		data->map[y][x] != 'E' && \
+		data->map[y][x] != 'P')
+	{
+		ft_printf("So Long: Error, not valid symbol on map\n");
+		free_array(data->map);
+		exit (2);
+	}
+}
 
 int	duplicate_validator(t_data *data)
 {
