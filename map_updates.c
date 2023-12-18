@@ -6,7 +6,7 @@
 /*   By: fcasaubo <fcasaubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 17:37:45 by fcasaubo          #+#    #+#             */
-/*   Updated: 2023/12/13 13:56:20 by fcasaubo         ###   ########.fr       */
+/*   Updated: 2023/12/18 16:20:06 by fcasaubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void	update_map(t_window *win, t_data *data, t_images *images)
 				put_image(win, images->player, x, y);
 			if (data->map[y][x] == 'C')
 				put_image(win, images->coins, x, y);
+			if (data->map[y][x] == 'F')
+				put_image(win, images->enemy, x, y);
 		}
 	}
 	draw_inner_walls(win, data, images);

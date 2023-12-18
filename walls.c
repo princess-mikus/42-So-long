@@ -6,7 +6,7 @@
 /*   By: fcasaubo <fcasaubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:33:39 by fcasaubo          #+#    #+#             */
-/*   Updated: 2023/12/13 13:58:45 by fcasaubo         ###   ########.fr       */
+/*   Updated: 2023/12/18 12:37:33 by fcasaubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ void	init_walls(t_window *win, t_images *images)
 	mlx_xpm_file_to_image(win->mlx, "sprites/Right_wall.xpm", &a, &b);
 	images->wall = \
 	mlx_xpm_file_to_image(win->mlx, "sprites/Wall.xpm", &a, &b);
+	images->upper_right_corner = \
+	mlx_xpm_file_to_image(win->mlx, "sprites/Right_upper_corner.xpm", &a, &b);
 }
 
 void	draw_outter_walls(t_window *win, t_data *data, t_images *images)

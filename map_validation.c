@@ -6,7 +6,7 @@
 /*   By: fcasaubo <fcasaubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 13:58:40 by fcasaubo          #+#    #+#             */
-/*   Updated: 2023/12/13 14:16:38 by fcasaubo         ###   ########.fr       */
+/*   Updated: 2023/12/18 11:30:42 by fcasaubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	check_valid_symbols(t_data *data, int x, int y)
 		data->map[y][x] != 'P')
 	{
 		ft_printf("So Long: Error, not valid symbol on map\n");
-		free_array(data->map);
+		free_array((void **)data->map);
 		exit (2);
 	}
 }

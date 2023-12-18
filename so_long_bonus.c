@@ -6,11 +6,11 @@
 /*   By: fcasaubo <fcasaubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:42:35 by fcasaubo          #+#    #+#             */
-/*   Updated: 2023/12/12 19:49:27 by fcasaubo         ###   ########.fr       */
+/*   Updated: 2023/12/18 16:50:06 by fcasaubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 void	create_map(void **structures)
 {
@@ -35,8 +35,8 @@ void	create_map(void **structures)
 	mlx_xpm_file_to_image(win->mlx, "sprites/Floor_placeholder.xpm", &a, &b);
 	images->wall = \
 	mlx_xpm_file_to_image(win->mlx, "sprites/Statue.xpm", &a, &b);
-	images->upper_right_corner = \
-	mlx_xpm_file_to_image(win->mlx, "sprites/Right_upper_corner.xpm", &a, &b);
+	images->enemy = \
+	mlx_xpm_file_to_image(win->mlx, "sprites/Placeholder_coin.xpm", &a, &b);
 	draw_outter_walls(structures[0], structures[1], structures[2]);
 	update_map(structures[0], structures[1], structures[2]);
 }
@@ -60,8 +60,12 @@ void	create_window(void **structures)
 	put_image(win, win->background, 0, 0);
 	images->coins = malloc((data->coins) * sizeof(void *));
 	images->floor = malloc(4096 * sizeof(void *));
+	spawn_enemies(data);
+	init_enemies(win, images);
 	create_map(structures);
+	data->tick = 0;
 	mlx_key_hook(win->ptr, key_hook, structures);
+	mlx_loop_hook(win->ptr, loop_hook, NULL);
 	mlx_loop(win->mlx);
 }
 
@@ -111,6 +115,5 @@ int	main(int argc, char **argv)
 	if (!map_validator(&data))
 		return (-1);
 	create_window(structures);
-	printf("I AM INDEED A BONUS");
 	return (0);
 }

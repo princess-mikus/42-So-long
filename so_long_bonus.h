@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   so_long_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fcasaubo <fcasaubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/07 11:03:16 by fcasaubo          #+#    #+#             */
-/*   Updated: 2023/12/18 12:39:45 by fcasaubo         ###   ########.fr       */
+/*   Created: 2023/12/18 11:39:59 by fcasaubo          #+#    #+#             */
+/*   Updated: 2023/12/18 16:58:04 by fcasaubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#ifndef SO_LONG_BONUS_H
+# define SO_LONG_BONUS_H
 
 # include "libft/get_next_line.h"
 # include "libft/libft.h"
 # include "libft/ft_printf.h"
 # include "mlx/mlx.h"
+# include <time.h>
 # include <limits.h>
 # include <fcntl.h>
 # include <stdio.h>
@@ -25,6 +26,11 @@
 # include <stdarg.h>
 # include <string.h>
 # include <errno.h>
+
+# define ENEMY_RATE	16
+# define JUMP_CHANCE 20
+# define MOVEMENT_CHANCE 95
+# define TICK_RATE 100
 
 // Main struct
 typedef struct s_data
@@ -38,6 +44,8 @@ typedef struct s_data
 	int		exit;
 	int		player_x;
 	int		player_y;
+	int		enemy_count;
+	int		tick;
 }		t_data;
 
 typedef struct s_temp_list
@@ -54,7 +62,14 @@ typedef struct s_list
 	void	*next;
 }		t_list;
 
-// MLX data structure (Sprite images)
+// Enemy images
+typedef struct s_enemy
+{
+	void	*enemy_jumping;
+}	t_enemy;
+
+
+// MLX images structure (Sprite images)
 
 typedef struct s_images
 {
@@ -74,6 +89,7 @@ typedef struct s_images
 	void	*coins_taken;
 	void	*floor;
 	void	*enemy;
+	t_enemy	enemy_images;
 }		t_images;
 
 // Mlx Window structure
@@ -124,5 +140,17 @@ void	free_array(void **array);
 
 // Close program cleanly
 void	close_game(t_window *win, t_data *data, t_images *images);
+
+// Spawn enemies
+void	spawn_enemies(t_data *data);
+
+// Init enemies
+void	init_enemies(t_window *window, t_images *images);
+
+// Move enemies
+void	enemy_movement(t_data *data, int enemy_x, int enemy_y, int *count);
+
+// Function hooked to the loop execution
+int		loop_hook(void);
 
 #endif //SO_LONG_H
