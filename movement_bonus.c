@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   movement.c                                         :+:      :+:    :+:   */
+/*   movement_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fcasaubo <fcasaubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 11:52:14 by fcasaubo          #+#    #+#             */
-/*   Updated: 2023/12/19 13:07:51 by fcasaubo         ###   ########.fr       */
+/*   Updated: 2023/12/26 18:31:05 by fcasaubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,11 @@ void	movement_up(t_data *data, int x, int y)
 		data->map[y - 1][x] = 'D';
 	else
 	{
-		if (data->map[y - 1][x] == 'C' || data->map[y - 1][x] == 'c')
+		if (data->map[y - 1][x] == 'F')
+			data->map[y - 1][x] = 'K';
+		if (data->map[y - 1][x] == 'f')
+			data->map[y - 1][x] = 'k';
+		else if (data->map[y - 1][x] == 'C' || data->map[y - 1][x] == 'c')
 		{
 			if (data->map[y - 1][x] == 'C')
 				data->coins--;
@@ -32,6 +36,8 @@ void	movement_up(t_data *data, int x, int y)
 		data->map[y][x] = 'E';
 	else if (data->map[y][x] == 'p')
 		data->map[y][x] = 'c';
+	else if (data->map[y][x] == 'K')
+		data->map[y][x] = 'F';
 	else
 		data->map[y][x] = '0';
 }
@@ -48,6 +54,8 @@ void	movement_down(t_data *data, int x, int y)
 				data->coins--;
 			data->map[y + 1][x] = 'p';
 		}
+		else if (data->map[y + 1][x] == 'F')
+			data->map[y + 1][x] = 'K';
 		else
 			data->map[y + 1][x] = 'P';
 	}
@@ -56,6 +64,8 @@ void	movement_down(t_data *data, int x, int y)
 		data->map[y][x] = 'E';
 	else if (data->map[y][x] == 'p')
 		data->map[y][x] = 'c';
+	else if (data->map[y][x] == 'K')
+		data->map[y][x] = 'F';
 	else
 		data->map[y][x] = '0';
 }
@@ -72,6 +82,8 @@ void	movement_left(t_data *data, int x, int y)
 				data->coins--;
 			data->map[y][x - 1] = 'p';
 		}
+		else if (data->map[y][x - 1] == 'F')
+			data->map[y][x - 1] = 'K';
 		else
 			data->map[y][x - 1] = 'P';
 	}
@@ -80,6 +92,8 @@ void	movement_left(t_data *data, int x, int y)
 		data->map[y][x] = 'E';
 	else if (data->map[y][x] == 'p')
 		data->map[y][x] = 'c';
+	else if (data->map[y][x] == 'K')
+		data->map[y][x] = 'F';
 	else
 		data->map[y][x] = '0';
 }
@@ -96,6 +110,8 @@ void	movement_right(t_data *data, int x, int y)
 				data->coins--;
 			data->map[y][x + 1] = 'p';
 		}
+		else if (data->map[y][x + 1] == 'F')
+			data->map[y][x + 1] = 'K';
 		else
 			data->map[y][x + 1] = 'P';
 	}
@@ -104,6 +120,8 @@ void	movement_right(t_data *data, int x, int y)
 		data->map[y][x] = 'E';
 	else if (data->map[y][x] == 'p')
 		data->map[y][x] = 'c';
+	else if (data->map[y][x] == 'K')
+		data->map[y][x] = 'F';
 	else
 		data->map[y][x] = '0';
 }

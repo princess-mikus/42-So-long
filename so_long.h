@@ -6,7 +6,7 @@
 /*   By: fcasaubo <fcasaubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 11:03:16 by fcasaubo          #+#    #+#             */
-/*   Updated: 2023/12/18 12:39:45 by fcasaubo         ###   ########.fr       */
+/*   Updated: 2023/12/26 12:46:34 by fcasaubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ typedef struct s_list
 }		t_list;
 
 // MLX data structure (Sprite images)
-
 typedef struct s_images
 {
 	void	*wall;
@@ -100,7 +99,9 @@ int		path_validator(t_data *data);
 
 // List Control
 t_list	*sl_lstnew(int y, int x);
+// List Control
 void	sl_lstadd_front(t_list **lst, t_list *new);
+// List Control
 void	sl_lstadd_back(t_list **lst, t_list *new);
 
 // Function hooked to key events

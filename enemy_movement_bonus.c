@@ -6,31 +6,33 @@
 /*   By: fcasaubo <fcasaubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 13:29:13 by fcasaubo          #+#    #+#             */
-/*   Updated: 2023/12/18 16:34:13 by fcasaubo         ###   ########.fr       */
+/*   Updated: 2023/12/26 18:29:39 by fcasaubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
 
-int	execute_jump(t_data *data, int vertical, int horizontal)
+int	execute_jump(t_data *data, int horizontal, int vertical)
 {
-	srand(time(NULL));
-	if (rand() % 100 <= JUMP_CHANCE)
+	if (get_random_number() % 100 <= JUMP_CHANCE)
 	{
-		data->map[vertical][horizontal] = 'f';
+		if (data->map[vertical][horizontal] == 'K' || \
+		data->map[vertical][horizontal] == 'k')
+			exit (0);
+		else
+			data->map[vertical][horizontal] = 'f';
 		return (1);
 	}
 	return (0);
 }
 
-void	move_enemy(int *enemy_x, int *enemy_y, int *count)
+void	move_enemy(int *enemy_x, int *enemy_y)
 {
 	int			random;
 	int			direction;
 
-	srand(time(NULL) + *count++);
-	direction = rand() % 2;
-	random = rand() % 2;
+	direction = get_random_number() % 2;
+	random = get_random_number() % 2;
 	if (direction)
 	{
 		if (random)
@@ -47,24 +49,29 @@ void	move_enemy(int *enemy_x, int *enemy_y, int *count)
 	}
 }
 
-void	enemy_movement(t_data *data, int enemy_x, int enemy_y, int *count)
+void	enemy_movement(t_data *data, int enemy_x, int enemy_y)
 {
 	int			new_x;
 	int			new_y;
-	int			count2;
+	static int	count = 0;
 
+	printf("ENEMY IN: %d %d\n", enemy_x, enemy_y);
 	if (execute_jump(data, enemy_x, enemy_y))
 		return ;
 	new_x = enemy_x;
 	new_y = enemy_y;
-	count = 0;
-	while (data->map[new_x][new_y] != '0' || *count++ < 10)
+	while (data->map[new_y][new_x] != '0' && count++ < 10)
 	{
-		new_x = 0;
-		new_y = 0;
-		move_enemy(&new_x, &new_y, &count2);
+		new_x = enemy_x;
+		new_y = enemy_y;
+		move_enemy(&new_x, &new_y);
+		printf("HE ENTRADO %d VECES, X: %d, Y: %d\n", count, new_x, new_y);
 	}
-	if (rand() % 100 <= MOVEMENT_CHANCE)
+	if (get_random_number() % 100 <= MOVEMENT_CHANCE \
+	&& data->map[new_y][new_x] == '0' && count != 10)
+	{
+		data->map[enemy_y][enemy_x] = '0';
 		data->map[new_y][new_x] = 'F';
+	}
 	count = 0;
 }

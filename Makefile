@@ -1,24 +1,30 @@
 NAME	:=	so_long
 MLX		:=	libmlx.a
 LIBFT	:=	libft.a
-FILES	:=	so_long				\
-			list_control		\
+FILES	:=	list_control		\
 			path_validation		\
-			movement			\
 			map_validation		\
 			map_updates			\
 			exit				\
 			utils				\
 			map_import			\
 			walls
-BFILES	:=	so_long
-
+BFILES	:=	enemies				\
+			loop_hook			\
+			enemy_movement		\
+			random				\
+			movement
+			
 CC		:=	gcc
 OBJ_DIR	:=	obj
 SRC		:=	$(addsuffix .c, $(FILES))
 BSRC	:=	$(addsuffix _bonus.c, $(BFILES))
 OBJ		:=	$(SRC:%.c=$(OBJ_DIR)/%.o)
 BOBJ	:=	$(BSRC:%.c=$(OBJ_DIR)/%.o)
+MSRC	:=	$(addsuffix .c, $(NAME))
+MBSRC	:=	$(addsuffix _bonus.c, $(NAME))
+MOBJ	:=	$(MSRC:%.c=$(OBJ_DIR)/%.o)
+MBOBJ	:=	$(MBSRC:%.c=$(OBJ_DIR)/%.o)
 
 all: $(NAME)
 
@@ -26,28 +32,29 @@ $(OBJ_DIR):
 	@mkdir $(OBJ_DIR)
 
 $(OBJ_DIR)/%.o: %.c $(OBJ_DIR)
-	@$(CC) -Wall -Wextra -Werror -Imlx -c $< -o $@ 2>/dev/null
+	@$(CC) -Wall -Wextra -Werror -Imlx -c $< -o $@
 
 $(LIBFT):
 	@echo "Compiling LIBFT..."
 	@make -C libft/ && mv libft/$(LIBFT) $(LIBFT) >/dev/null
 	@echo "LIBFT Compiled!"
 
-$(NAME): $(LIBFT) $(OBJ)
+$(NAME): $(LIBFT) $(MOBJ) $(OBJ)
+	@echo $(MSRC)
+	@echo $(MOBJ)
 	@echo "Compiling MLX..."
 	@make -C ./mlx/ 1>/dev/null 2>/dev/null && mv ./mlx/libmlx.a . 2>/dev/null
 	@echo "Compiled!"
 	@echo "Making executable..."
-	@$(CC) $(OBJ) -Lmlx -framework OpenGL -framework AppKit $(MLX) $(LIBFT) -o $(NAME) -g -fsanitize=address 2>/dev/null
+	@$(CC) $(MOBJ) $(OBJ) -Lmlx -framework OpenGL -framework AppKit $(MLX) $(LIBFT) -o $(NAME)
 	@echo "Ready!"
 
-bonus: $(BOJB) $(LIBFT) $(BOBJ) $(OBJ)
+bonus: $(BOJB) $(LIBFT) $(MBOBJ) $(BOBJ) $(OBJ)	
 	@echo "Compiling MLX..."
 	@make -C ./mlx/ 1>/dev/null 2>/dev/null && mv ./mlx/libmlx.a . 2>/dev/null
 	@echo "Compiled!"
 	@echo "Making bonus executable..."
-	@rm $(OBJ_DIR)/so_long.o >/dev/null
-	@$(CC) $(OBJ) $(BOBJ) -Lmlx -framework OpenGL -framework AppKit $(MLX) $(LIBFT) -o $(NAME) -g -fsanitize=address
+	@$(CC) $(MBOBJ) $(OBJ) $(BOBJ) -g -Lmlx -framework OpenGL -framework AppKit $(MLX) $(LIBFT) -o $(NAME) -g3 -fsanitize=address
 	@echo "Ready!"
 
 

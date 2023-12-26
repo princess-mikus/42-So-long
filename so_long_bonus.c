@@ -6,7 +6,7 @@
 /*   By: fcasaubo <fcasaubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:42:35 by fcasaubo          #+#    #+#             */
-/*   Updated: 2023/12/18 16:50:06 by fcasaubo         ###   ########.fr       */
+/*   Updated: 2023/12/26 18:06:08 by fcasaubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	create_map(void **structures)
 	images->wall = \
 	mlx_xpm_file_to_image(win->mlx, "sprites/Statue.xpm", &a, &b);
 	images->enemy = \
-	mlx_xpm_file_to_image(win->mlx, "sprites/Placeholder_coin.xpm", &a, &b);
+	mlx_xpm_file_to_image(win->mlx, "sprites/Enemy_idle.xpm", &a, &b);
 	draw_outter_walls(structures[0], structures[1], structures[2]);
 	update_map(structures[0], structures[1], structures[2]);
 }
@@ -65,7 +65,7 @@ void	create_window(void **structures)
 	create_map(structures);
 	data->tick = 0;
 	mlx_key_hook(win->ptr, key_hook, structures);
-	mlx_loop_hook(win->ptr, loop_hook, NULL);
+	mlx_loop_hook(win->mlx, loop_hook, structures);
 	mlx_loop(win->mlx);
 }
 

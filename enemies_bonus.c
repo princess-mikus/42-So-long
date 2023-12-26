@@ -6,7 +6,7 @@
 /*   By: fcasaubo <fcasaubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 10:54:52 by fcasaubo          #+#    #+#             */
-/*   Updated: 2023/12/18 16:18:02 by fcasaubo         ###   ########.fr       */
+/*   Updated: 2023/12/26 18:09:13 by fcasaubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@ void	spawn_single_enemy(t_data *data)
 {
 	int			random_x;
 	int			random_y;
-	static int	count = 0;
 
-	srand(time(NULL) + count++);
 	random_x = rand() % data->map_x;
 	random_y = rand() % (data->map_y - 3);
 	if (data->map[random_y][random_x] == '0')
@@ -70,7 +68,7 @@ void	init_enemies(t_window *window, t_images *images)
 	int	b;
 
 	images->enemy_images.enemy_jumping = \
-	mlx_xpm_file_to_image(window->mlx, "sprites/Placeholder_wall", &a, &b);
+	mlx_xpm_file_to_image(window->mlx, "sprites/Enemy_jumping.xpm", &a, &b);
 }
 
 void	spawn_enemies(t_data *data)

@@ -6,7 +6,7 @@
 /*   By: fcasaubo <fcasaubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 11:39:59 by fcasaubo          #+#    #+#             */
-/*   Updated: 2023/12/18 16:58:04 by fcasaubo         ###   ########.fr       */
+/*   Updated: 2023/12/26 17:13:32 by fcasaubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include <stdarg.h>
 # include <string.h>
 # include <errno.h>
+# include <limits.h>
 
 # define ENEMY_RATE	16
 # define JUMP_CHANCE 20
@@ -46,6 +47,7 @@ typedef struct s_data
 	int		player_y;
 	int		enemy_count;
 	int		tick;
+	int		random_fd;
 }		t_data;
 
 typedef struct s_temp_list
@@ -148,9 +150,12 @@ void	spawn_enemies(t_data *data);
 void	init_enemies(t_window *window, t_images *images);
 
 // Move enemies
-void	enemy_movement(t_data *data, int enemy_x, int enemy_y, int *count);
+void	enemy_movement(t_data *data, int enemy_x, int enemy_y);
 
 // Function hooked to the loop execution
-int		loop_hook(void);
+int		loop_hook(void **structures);
+
+// Random Number Generator, 'cause Rand() sucks
+int	get_random_number(void);
 
 #endif //SO_LONG_H

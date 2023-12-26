@@ -6,7 +6,7 @@
 /*   By: fcasaubo <fcasaubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 13:58:40 by fcasaubo          #+#    #+#             */
-/*   Updated: 2023/12/18 11:30:42 by fcasaubo         ###   ########.fr       */
+/*   Updated: 2023/12/19 15:55:01 by fcasaubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	duplicate_validator(t_data *data)
 				data->coins++;
 		}
 	}
-	if (data->players != 1 || data->exit != 1 || data->coins < 0)
+	if (data->players != 1 || data->exit != 1 || data->coins <= 0)
 		return (0);
 	return (1);
 }
