@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcasaubo <fcasaubo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mikus <mikus@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 17:50:43 by fcasaubo          #+#    #+#             */
-/*   Updated: 2023/12/12 18:10:56 by fcasaubo         ###   ########.fr       */
+/*   Updated: 2023/12/27 18:17:45 by mikus            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,11 @@ void	close_game(t_window *win, t_data *data, t_images *images)
 	free_window(win);
 	free_array((void *)data->map);
 	exit (0);
+}
+
+void	close_window(void **structures)
+{
+	close_game(structures[0], structures[1], structures[2]);
 }
 
 void	check_win(t_window *win, t_data *data, t_images *images)

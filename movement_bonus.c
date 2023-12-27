@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcasaubo <fcasaubo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mikus <mikus@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 11:52:14 by fcasaubo          #+#    #+#             */
-/*   Updated: 2023/12/26 18:31:05 by fcasaubo         ###   ########.fr       */
+/*   Updated: 2023/12/27 18:29:15 by mikus            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,18 @@ void	movement_up(t_data *data, int x, int y)
 {
 	if (data->map[y - 1][x] == 'E')
 		data->map[y - 1][x] = 'D';
-	else
+	else if (data->map[y - 1][x] == 'F')
+		data->map[y - 1][x] = 'K';
+	else if (data->map[y - 1][x] == 'f')
+		data->map[y - 1][x] = 'k';
+	else if (data->map[y - 1][x] == 'C' || data->map[y - 1][x] == 'c')
 	{
-		if (data->map[y - 1][x] == 'F')
-			data->map[y - 1][x] = 'K';
-		if (data->map[y - 1][x] == 'f')
-			data->map[y - 1][x] = 'k';
-		else if (data->map[y - 1][x] == 'C' || data->map[y - 1][x] == 'c')
-		{
-			if (data->map[y - 1][x] == 'C')
-				data->coins--;
-			data->map[y - 1][x] = 'p';
-		}
-		else
-			data->map[y - 1][x] = 'P';
+		if (data->map[y - 1][x] == 'C')
+			data->coins--;
+		data->map[y - 1][x] = 'p';
 	}
+	else
+		data->map[y - 1][x] = 'P';
 	data->player_y--;
 	if (data->map[y][x] == 'D')
 		data->map[y][x] = 'E';
@@ -46,19 +43,18 @@ void	movement_down(t_data *data, int x, int y)
 {
 	if (data->map[y + 1][x] == 'E')
 		data->map[y + 1][x] = 'D';
-	else
+	else if (data->map[y + 1][x] == 'F')
+		data->map[y + 1][x] = 'K';
+	else if (data->map[y + 1][x] == 'f')
+		data->map[y + 1][x] = 'k';
+	else if (data->map[y + 1][x] == 'C' || data->map[y + 1][x] == 'c')
 	{
-		if (data->map[y + 1][x] == 'C' || data->map[y + 1][x] == 'c')
-		{
-			if (data->map[y + 1][x] == 'C')
-				data->coins--;
-			data->map[y + 1][x] = 'p';
-		}
-		else if (data->map[y + 1][x] == 'F')
-			data->map[y + 1][x] = 'K';
-		else
-			data->map[y + 1][x] = 'P';
+		if (data->map[y + 1][x] == 'C')
+			data->coins--;
+		data->map[y + 1][x] = 'p';
 	}
+	else
+		data->map[y - 1][x] = 'P';
 	data->player_y++;
 	if (data->map[y][x] == 'D')
 		data->map[y][x] = 'E';
@@ -74,19 +70,18 @@ void	movement_left(t_data *data, int x, int y)
 {
 	if (data->map[y][x - 1] == 'E')
 		data->map[y][x - 1] = 'D';
-	else
+	else if (data->map[y][x - 1] == 'F')
+		data->map[y][x - 1] = 'K';
+	else if (data->map[y][x - 1] == 'f')
+		data->map[y][x - 1] = 'k';
+	else if (data->map[y][x - 1] == 'C' || data->map[y][x - 1] == 'c')
 	{
-		if (data->map[y][x - 1] == 'C' || data->map[y][x - 1] == 'c')
-		{
-			if (data->map[y][x - 1] == 'C')
-				data->coins--;
-			data->map[y][x - 1] = 'p';
-		}
-		else if (data->map[y][x - 1] == 'F')
-			data->map[y][x - 1] = 'K';
-		else
-			data->map[y][x - 1] = 'P';
+		if (data->map[y][x - 1] == 'C')
+			data->coins--;
+		data->map[y][x - 1] = 'p';
 	}
+	else
+		data->map[y][x - 1] = 'P';
 	data->player_x--;
 	if (data->map[y][x] == 'D')
 		data->map[y][x] = 'E';
@@ -102,19 +97,18 @@ void	movement_right(t_data *data, int x, int y)
 {
 	if (data->map[y][x + 1] == 'E')
 		data->map[y][x + 1] = 'D';
-	else
+	else if (data->map[y][x + 1] == 'F')
+		data->map[y][x + 1] = 'K';
+	else if (data->map[y][x + 1] == 'f')
+		data->map[y][x + 1] = 'k';
+	else if (data->map[y][x + 1] == 'C' || data->map[y][x + 1] == 'c')
 	{
-		if (data->map[y][x + 1] == 'C' || data->map[y][x + 1] == 'c')
-		{
-			if (data->map[y][x + 1] == 'C')
-				data->coins--;
-			data->map[y][x + 1] = 'p';
-		}
-		else if (data->map[y][x + 1] == 'F')
-			data->map[y][x + 1] = 'K';
-		else
-			data->map[y][x + 1] = 'P';
+		if (data->map[y][x + 1] == 'C')
+			data->coins--;
+		data->map[y][x + 1] = 'p';
 	}
+	else
+		data->map[y][x + 1] = 'P';
 	data->player_x++;
 	if (data->map[y][x] == 'D')
 		data->map[y][x] = 'E';
@@ -149,7 +143,8 @@ int	key_hook(int keycode, void **structures)
 	if (x != data->player_x || y != data->player_y)
 	{
 		if (data->movements < INT_MAX)
-			ft_printf("%d\n", data->movements++);
+			ft_printf("%d\n", data->movements);
+		put_number(data->movements++, structures[0], data, structures[2]);
 	}
 	return (keycode);
 }

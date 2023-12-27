@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcasaubo <fcasaubo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mikus <mikus@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 11:39:59 by fcasaubo          #+#    #+#             */
-/*   Updated: 2023/12/26 17:13:32 by fcasaubo         ###   ########.fr       */
+/*   Updated: 2023/12/27 19:26:56 by mikus            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "libft/get_next_line.h"
 # include "libft/libft.h"
 # include "libft/ft_printf.h"
-# include "mlx/mlx.h"
+# include "mlx/mlx_mac/mlx.h"
 # include <time.h>
 # include <limits.h>
 # include <fcntl.h>
@@ -70,7 +70,6 @@ typedef struct s_enemy
 	void	*enemy_jumping;
 }	t_enemy;
 
-
 // MLX images structure (Sprite images)
 
 typedef struct s_images
@@ -91,6 +90,10 @@ typedef struct s_images
 	void	*coins_taken;
 	void	*floor;
 	void	*enemy;
+	void	*number[10];
+	void	*black;
+	void	*player_dead[2];
+	void	*game_over;
 	t_enemy	enemy_images;
 }		t_images;
 
@@ -126,10 +129,14 @@ int		key_hook(int keycode, void **temp);
 
 // Wall drawing
 void	draw_outter_walls(t_window *win, t_data *data, t_images *images);
+// Wall Drawing
 void	draw_inner_walls(t_window *win, t_data *data, t_images *images);
 
 // Replacing mlx_put_image 'cause it's too long for Normie
 void	put_image(t_window	*win, void	*img, int x, int y);
+
+// Put step count in upper right corner of the screen
+void	put_number(int nbr, t_window *win, t_data *data, t_images *images);
 
 // Map Drawing
 void	update_map(t_window *win, t_data *data, t_images *images);
@@ -156,6 +163,6 @@ void	enemy_movement(t_data *data, int enemy_x, int enemy_y);
 int		loop_hook(void **structures);
 
 // Random Number Generator, 'cause Rand() sucks
-int	get_random_number(void);
+int		get_random_number(void);
 
 #endif //SO_LONG_H

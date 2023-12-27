@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   enemies_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcasaubo <fcasaubo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mikus <mikus@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 10:54:52 by fcasaubo          #+#    #+#             */
-/*   Updated: 2023/12/26 18:09:13 by fcasaubo         ###   ########.fr       */
+/*   Updated: 2023/12/27 19:15:11 by mikus            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,17 @@ void	init_enemies(t_window *window, t_images *images)
 	int	a;
 	int	b;
 
+	images->enemy = \
+	mlx_xpm_file_to_image(window->mlx, "textures/Enemy/Enemy_idle.xpm", &a, &b);
 	images->enemy_images.enemy_jumping = \
-	mlx_xpm_file_to_image(window->mlx, "sprites/Enemy_jumping.xpm", &a, &b);
+	mlx_xpm_file_to_image(window->mlx, \
+	"textures/Enemy/Enemy_jumping.xpm", &a, &b);
+	images->player_dead[0] = \
+	mlx_xpm_file_to_image(window->mlx, "textures/Player/Dead1.xpm", &a, &b);
+	images->player_dead[1] = \
+	mlx_xpm_file_to_image(window->mlx, "textures/Player/Dead2.xpm", &a, &b);
+	images->game_over = \
+	mlx_xpm_file_to_image(window->mlx, "textures/Misc/Game_over.xpm", &a, &b);
 }
 
 void	spawn_enemies(t_data *data)

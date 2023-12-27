@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcasaubo <fcasaubo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mikus <mikus@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 11:03:16 by fcasaubo          #+#    #+#             */
-/*   Updated: 2023/12/26 12:46:34 by fcasaubo         ###   ########.fr       */
+/*   Updated: 2023/12/27 19:26:25 by mikus            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "libft/get_next_line.h"
 # include "libft/libft.h"
 # include "libft/ft_printf.h"
-# include "mlx/mlx.h"
+# include "mlx/mlx_mac/mlx.h"
 # include <limits.h>
 # include <fcntl.h>
 # include <stdio.h>
@@ -125,5 +125,9 @@ void	free_array(void **array);
 
 // Close program cleanly
 void	close_game(t_window *win, t_data *data, t_images *images);
+
+// Close window function
+//due to imposed restrictions of arguments of MLX hooked functions
+void	close_window(void **structures);
 
 #endif //SO_LONG_H

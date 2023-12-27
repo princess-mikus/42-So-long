@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop_hook_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcasaubo <fcasaubo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mikus <mikus@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 13:47:02 by fcasaubo          #+#    #+#             */
-/*   Updated: 2023/12/26 18:27:04 by fcasaubo         ###   ########.fr       */
+/*   Updated: 2023/12/27 17:40:17 by mikus            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,33 +37,11 @@ void	search_enemies(t_data	*data)
 	count = 0;
 }
 
-void	redraw_enemies(t_window *window, t_data	*data, t_images *images)
-{
-	int	y;
-	int	x;
-
-	y = -1;
-	while (data->map[++y])
-	{
-		x = -1;
-		while (data->map[y][++x])
-		{
-			if (data->map[y][x] == 'f')
-				put_image(window->ptr, \
-				images->enemy_images.enemy_jumping, x, y);
-		}
-	}
-}
-
 int	loop_hook(void **structures)
 {
-	t_window	*win;
 	t_data		*data;
-	t_images	*images;
 
-	win = structures[0];
 	data = structures[1];
-	images = structures[2];
 	if (data->tick == TICK_RATE)
 	{
 		search_enemies(data);

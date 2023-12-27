@@ -1,30 +1,42 @@
 NAME	:=	so_long
+OS 		:= $(shell uname)
 MLX		:=	libmlx.a
 LIBFT	:=	libft.a
 FILES	:=	list_control		\
 			path_validation		\
 			map_validation		\
-			map_updates			\
 			exit				\
 			utils				\
 			map_import			\
 			walls
+
+MFILES	:=	so_long				\
+			movement			\
+			map_updates
+
 BFILES	:=	enemies				\
 			loop_hook			\
 			enemy_movement		\
 			random				\
-			movement
-			
+			counter
+
 CC		:=	gcc
 OBJ_DIR	:=	obj
 SRC		:=	$(addsuffix .c, $(FILES))
-BSRC	:=	$(addsuffix _bonus.c, $(BFILES))
+MSRC	:=	$(addsuffix .c, $(MFILES))
+BSRC	:=	$(addsuffix _bonus.c, $(MFILES) $(BFILES))
 OBJ		:=	$(SRC:%.c=$(OBJ_DIR)/%.o)
 BOBJ	:=	$(BSRC:%.c=$(OBJ_DIR)/%.o)
-MSRC	:=	$(addsuffix .c, $(NAME))
-MBSRC	:=	$(addsuffix _bonus.c, $(NAME))
 MOBJ	:=	$(MSRC:%.c=$(OBJ_DIR)/%.o)
 MBOBJ	:=	$(MBSRC:%.c=$(OBJ_DIR)/%.o)
+
+ifeq ($(OS), Darwin)
+MLX_PATH	= mlx/mlx_mac
+MLX_FLAGS	= -framework OpenGL -framework AppKit
+else ifeq ($(OS), Linux)
+MLX_PATH	= mlx/mlx_linux
+MLX_FLAGS	= -L/usr/lib -lXext -lX11 -lm -lz
+endif
 
 all: $(NAME)
 
@@ -40,33 +52,31 @@ $(LIBFT):
 	@echo "LIBFT Compiled!"
 
 $(NAME): $(LIBFT) $(MOBJ) $(OBJ)
-	@echo $(MSRC)
-	@echo $(MOBJ)
 	@echo "Compiling MLX..."
-	@make -C ./mlx/ 1>/dev/null 2>/dev/null && mv ./mlx/libmlx.a . 2>/dev/null
+	@make -C $(MLX_PATH) 1>/dev/null 2>/dev/null && cd $(MLX_PATH) && mv $(MLX) ../../$(MLX)
 	@echo "Compiled!"
 	@echo "Making executable..."
-	@$(CC) $(MOBJ) $(OBJ) -Lmlx -framework OpenGL -framework AppKit $(MLX) $(LIBFT) -o $(NAME)
+	$(CC) $(MOBJ) $(OBJ) $(LIBFT) $(MLX) $(MLX_FLAGS) -o $(NAME)
 	@echo "Ready!"
 
-bonus: $(BOJB) $(LIBFT) $(MBOBJ) $(BOBJ) $(OBJ)	
+bonus: $(BOJB) $(LIBFT) $(BOBJ) $(OBJ)	
 	@echo "Compiling MLX..."
-	@make -C ./mlx/ 1>/dev/null 2>/dev/null && mv ./mlx/libmlx.a . 2>/dev/null
+	@make -C $(MLX_PATH) 1>/dev/null 2>/dev/null && cd $(MLX_PATH) && mv $(MLX) ../../$(MLX)
 	@echo "Compiled!"
 	@echo "Making bonus executable..."
-	@$(CC) $(MBOBJ) $(OBJ) $(BOBJ) -g -Lmlx -framework OpenGL -framework AppKit $(MLX) $(LIBFT) -o $(NAME) -g3 -fsanitize=address
+	@$(CC) $(OBJ) $(BOBJ) $(LIBFT)  $(MLX) $(MLX_FLAGS) -o $(NAME)
 	@echo "Ready!"
-
 
 clean:
 	@rm -rf obj >/dev/null
 	@rm $(LIBFT) 2>/dev/null
 	@make -C libft/ clean
+	@make $(MLX_PATH) clean
 	@echo "Cleaned\n"
 
 fclean: clean
-	@rm $(NAME) >/dev/null
 	@rm $(MLX)	>/dev/null
+	@rm $(NAME) >/dev/null
 	@make -C libft/ fclean >/dev/null
 
 re:	fclean all

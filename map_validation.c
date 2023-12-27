@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_validation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcasaubo <fcasaubo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mikus <mikus@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 13:58:40 by fcasaubo          #+#    #+#             */
-/*   Updated: 2023/12/19 15:55:01 by fcasaubo         ###   ########.fr       */
+/*   Updated: 2023/12/27 17:38:41 by mikus            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ int	wall_validator(char **map)
 int	map_validator(t_data *data)
 {
 	data->exit = 0;
+	data->players = 0;
 	data->coins = 0;
 	if (!wall_validator(data->map))
 	{

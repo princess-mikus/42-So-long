@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fcasaubo <fcasaubo@student.42.fr>          +#+  +:+       +#+         #
+#    By: mikus <mikus@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/11 11:53:01 by fcasaubo          #+#    #+#              #
-#    Updated: 2023/12/12 19:18:49 by fcasaubo         ###   ########.fr        #
+#    Updated: 2023/12/27 17:07:47 by mikus            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,7 +74,6 @@ OBJ		:= $(SRC:.c=.o)
 BOBJ	:= $(BSRC:.c=.o)
 
 GCC		:= gcc
-FLG		:= -Wall -Wextra -Werror
 
 .SILENT:
 
@@ -87,7 +86,7 @@ bonus: $(BOBJ)
 	ar -cr $(NAME) $(BOBJ)
 
 %.o: %.c
-	$(GCC) -c $(FLG) *.c
+	$(GCC) -c *.c
 
 clean:
 	rm -f $(OBJ) $(BOBJ)

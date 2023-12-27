@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   walls.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcasaubo <fcasaubo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mikus <mikus@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:33:39 by fcasaubo          #+#    #+#             */
-/*   Updated: 2023/12/18 12:37:33 by fcasaubo         ###   ########.fr       */
+/*   Updated: 2023/12/27 19:08:10 by mikus            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,23 +69,26 @@ void	init_walls(t_window *win, t_images *images)
 	int	b;
 
 	images->right_corner = \
-	mlx_xpm_file_to_image(win->mlx, "sprites/Right_corner.xpm", &a, &b);
+	mlx_xpm_file_to_image(win->mlx, "textures/Walls/Right_corner.xpm", &a, &b);
 	images->left_corner = \
-	mlx_xpm_file_to_image(win->mlx, "sprites/Left_corner.xpm", &a, &b);
-	images->upper_left_corner = \
-	mlx_xpm_file_to_image(win->mlx, "sprites/Left_upper_corner.xpm", &a, &b);
+	mlx_xpm_file_to_image(win->mlx, "textures/Walls/Left_corner.xpm", &a, &b);
 	images->middle_corner = \
-	mlx_xpm_file_to_image(win->mlx, "sprites/Middle_corner.xpm", &a, &b);
-	images->upper_middle_corner = \
-	mlx_xpm_file_to_image(win->mlx, "sprites/Upper_middle_corner.xpm", &a, &b);
-	images->left_wall = \
-	mlx_xpm_file_to_image(win->mlx, "sprites/Left_wall.xpm", &a, &b);
-	images->right_wall = \
-	mlx_xpm_file_to_image(win->mlx, "sprites/Right_wall.xpm", &a, &b);
-	images->wall = \
-	mlx_xpm_file_to_image(win->mlx, "sprites/Wall.xpm", &a, &b);
+	mlx_xpm_file_to_image(win->mlx, "textures/Walls/Middle_corner.xpm", &a, &b);
+	images->upper_left_corner = \
+	mlx_xpm_file_to_image(win->mlx, \
+	"textures/Walls/Left_upper_corner.xpm", &a, &b);
 	images->upper_right_corner = \
-	mlx_xpm_file_to_image(win->mlx, "sprites/Right_upper_corner.xpm", &a, &b);
+	mlx_xpm_file_to_image(win->mlx, \
+	"textures/Walls/Right_upper_corner.xpm", &a, &b);
+	images->upper_middle_corner = \
+	mlx_xpm_file_to_image(win->mlx, \
+	"textures/Walls/Upper_middle_corner.xpm", &a, &b);
+	images->left_wall = \
+	mlx_xpm_file_to_image(win->mlx, "textures/Walls/Left_wall.xpm", &a, &b);
+	images->right_wall = \
+	mlx_xpm_file_to_image(win->mlx, "textures/Walls/Right_wall.xpm", &a, &b);
+	images->wall = \
+	mlx_xpm_file_to_image(win->mlx, "textures/Walls/Wall.xpm", &a, &b);
 }
 
 void	draw_outter_walls(t_window *win, t_data *data, t_images *images)

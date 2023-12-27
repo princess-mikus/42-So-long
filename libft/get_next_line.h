@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcasaubo <fcasaubo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mikus <mikus@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 11:34:22 by fcasaubo          #+#    #+#             */
-/*   Updated: 2023/07/10 11:38:18 by fcasaubo         ###   ########.fr       */
+/*   Updated: 2023/12/27 12:36:25 by mikus            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_BONUS_H
-# define GET_NEXT_LINE_BONUS_H
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdio.h>
@@ -44,4 +44,4 @@ char	*gnl_truncate(char *str, int from);
 void	gnl_str_cleaner(t_struct *data, int remain_bool, \
 						int line_bool, int buffer_bool);
 
-#endif // GET_NEXT_LINE_BONUS_H
+#endif // GET_NEXT_LINE_H

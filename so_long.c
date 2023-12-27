@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcasaubo <fcasaubo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mikus <mikus@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 10:06:57 by fcasaubo          #+#    #+#             */
-/*   Updated: 2023/12/18 15:25:01 by fcasaubo         ###   ########.fr       */
+/*   Updated: 2023/12/27 19:05:50 by mikus            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,17 @@ void	create_map(void **structures)
 	win = structures[0];
 	images = structures[2];
 	images->door_open = \
-	mlx_xpm_file_to_image(win->mlx, "sprites/Door_Open.xpm", &a, &b);
+	mlx_xpm_file_to_image(win->mlx, "textures/Map/Door_Open.xpm", &a, &b);
 	images->door_closed = \
-	mlx_xpm_file_to_image(win->mlx, "sprites/Door_Closed.xpm", &a, &b);
+	mlx_xpm_file_to_image(win->mlx, "textures/Map/Door_Closed.xpm", &a, &b);
 	images->coins = \
-	mlx_xpm_file_to_image(win->mlx, "sprites/Coin.xpm", &a, &b);
+	mlx_xpm_file_to_image(win->mlx, "textures/Map/Coin.xpm", &a, &b);
 	images->coins_taken = \
-	mlx_xpm_file_to_image(win->mlx, "sprites/Coin_taken.xpm", &a, &b);
+	mlx_xpm_file_to_image(win->mlx, "textures/Map/Coin_taken.xpm", &a, &b);
 	images->player = \
-	mlx_xpm_file_to_image(win->mlx, "sprites/TEMMIE.xpm", &a, &b);
+	mlx_xpm_file_to_image(win->mlx, "textures/Player/Player.xpm", &a, &b);
 	images->floor = \
-	mlx_xpm_file_to_image(win->mlx, "sprites/Floor_placeholder.xpm", &a, &b);
-	images->wall = \
-	mlx_xpm_file_to_image(win->mlx, "sprites/Statue.xpm", &a, &b);
-	images->upper_right_corner = \
-	mlx_xpm_file_to_image(win->mlx, "sprites/Right_upper_corner.xpm", &a, &b);
+	mlx_xpm_file_to_image(win->mlx, "textures/Map/Floor.xpm", &a, &b);
 	draw_outter_walls(structures[0], structures[1], structures[2]);
 	update_map(structures[0], structures[1], structures[2]);
 }
@@ -45,21 +41,20 @@ void	create_window(void **structures)
 {
 	t_window	*win;
 	t_data		*data;
-	t_images	*images;
 
 	win = structures[0];
 	data = structures[1];
-	images = structures[2];
 	win->size_x = data->map_x * 64;
 	win->size_y = data->map_y * 64;
 	win->mlx = mlx_init();
 	win->ptr = \
 	mlx_new_window(win->mlx, win->size_x, win->size_y, "hOI!!! i'm TEMMIE!!");
 	win->background = mlx_xpm_file_to_image \
-	(win->mlx, "sprites/Background.xpm", &win->bg_x, &win->bg_y);
+	(win->mlx, "textures/Background.xpm", &win->bg_x, &win->bg_y);
 	put_image(win, win->background, 0, 0);
 	create_map(structures);
 	mlx_key_hook(win->ptr, key_hook, structures);
+	mlx_hook(win->ptr, 17, 0, close_window, structures);
 	mlx_loop(win->mlx);
 }
 
